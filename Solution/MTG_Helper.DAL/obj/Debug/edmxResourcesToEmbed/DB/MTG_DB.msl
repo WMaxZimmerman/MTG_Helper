@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MTG_DBModelStoreContainer" CdmEntityContainer="MtgEntities">
+    <EntitySetMapping Name="CardColors">
+      <EntityTypeMapping TypeName="MTG_DBModel.CardColor">
+        <MappingFragment StoreEntitySet="CardColors">
+          <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cards">
+      <EntityTypeMapping TypeName="MTG_DBModel.Card">
+        <MappingFragment StoreEntitySet="Cards">
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="StoreUrl" ColumnName="StoreUrl" />
+          <ScalarProperty Name="ConvertedManaCost" ColumnName="ConvertedManaCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="RulesText" ColumnName="RulesText" />
+          <ScalarProperty Name="Power" ColumnName="Power" />
+          <ScalarProperty Name="Toughness" ColumnName="Toughness" />
+          <ScalarProperty Name="Commander" ColumnName="Commander" />
+          <ScalarProperty Name="Legacy" ColumnName="Legacy" />
+          <ScalarProperty Name="Modern" ColumnName="Modern" />
+          <ScalarProperty Name="Standard" ColumnName="Standard" />
+          <ScalarProperty Name="Vintage" ColumnName="Vintage" />
+          <ScalarProperty Name="Types" ColumnName="Types" />
+          <ScalarProperty Name="SubTypes" ColumnName="SubTypes" />
+          <ScalarProperty Name="Colors" ColumnName="Colors" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardSets">
+      <EntityTypeMapping TypeName="MTG_DBModel.CardSet">
+        <MappingFragment StoreEntitySet="CardSets">
+          <ScalarProperty Name="CardSetId" ColumnName="CardSetId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="SetId" ColumnName="SetId" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="MultiverseId" ColumnName="MultiverseId" />
+          <ScalarProperty Name="Artist" ColumnName="Artist" />
+          <ScalarProperty Name="Rarity" ColumnName="Rarity" />
+          <ScalarProperty Name="FlavorText" ColumnName="FlavorText" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="StoreUrl" ColumnName="StoreUrl" />
+          <ScalarProperty Name="HighPrice" ColumnName="HighPrice" />
+          <ScalarProperty Name="MedianPrice" ColumnName="MedianPrice" />
+          <ScalarProperty Name="LowPrice" ColumnName="LowPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardSubTypes">
+      <EntityTypeMapping TypeName="MTG_DBModel.CardSubType">
+        <MappingFragment StoreEntitySet="CardSubTypes">
+          <ScalarProperty Name="CardSubTypeId" ColumnName="CardSubTypeId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="SubTypeId" ColumnName="SubTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardTypes">
+      <EntityTypeMapping TypeName="MTG_DBModel.CardType">
+        <MappingFragment StoreEntitySet="CardTypes">
+          <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colors">
+      <EntityTypeMapping TypeName="MTG_DBModel.Color">
+        <MappingFragment StoreEntitySet="Colors">
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+          <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sets">
+      <EntityTypeMapping TypeName="MTG_DBModel.Set">
+        <MappingFragment StoreEntitySet="Sets">
+          <ScalarProperty Name="SetId" ColumnName="SetId" />
+          <ScalarProperty Name="SetName" ColumnName="SetName" />
+          <ScalarProperty Name="Border" ColumnName="Border" />
+          <ScalarProperty Name="SetType" ColumnName="SetType" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="SetNumber" ColumnName="SetNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubTypes">
+      <EntityTypeMapping TypeName="MTG_DBModel.SubType">
+        <MappingFragment StoreEntitySet="SubTypes">
+          <ScalarProperty Name="SubTypeId" ColumnName="SubTypeId" />
+          <ScalarProperty Name="SubTypeName" ColumnName="SubTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="MTG_DBModel.Type">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

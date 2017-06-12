@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MTG_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CardColors">
+    <Key>
+      <PropertyRef Name="CardTypeId" />
+    </Key>
+    <Property Name="CardTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ColorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cards">
+    <Key>
+      <PropertyRef Name="CardId" />
+    </Key>
+    <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CardName" Type="varchar" MaxLength="255" />
+    <Property Name="Url" Type="nvarchar(max)" />
+    <Property Name="StoreUrl" Type="nvarchar(max)" />
+    <Property Name="ConvertedManaCost" Type="nvarchar(max)" />
+    <Property Name="Cost" Type="nvarchar(max)" />
+    <Property Name="RulesText" Type="nvarchar(max)" />
+    <Property Name="Power" Type="nvarchar(max)" />
+    <Property Name="Toughness" Type="nvarchar(max)" />
+    <Property Name="Commander" Type="nvarchar(max)" />
+    <Property Name="Legacy" Type="nvarchar(max)" />
+    <Property Name="Modern" Type="nvarchar(max)" />
+    <Property Name="Standard" Type="nvarchar(max)" />
+    <Property Name="Vintage" Type="nvarchar(max)" />
+    <Property Name="Types" Type="nvarchar(max)" />
+    <Property Name="SubTypes" Type="nvarchar(max)" />
+    <Property Name="Colors" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CardSets">
+    <Key>
+      <PropertyRef Name="CardSetId" />
+    </Key>
+    <Property Name="CardSetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SetId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CardNumber" Type="nvarchar(max)" />
+    <Property Name="MultiverseId" Type="bigint" Nullable="false" />
+    <Property Name="Artist" Type="nvarchar(max)" />
+    <Property Name="Rarity" Type="nvarchar(max)" />
+    <Property Name="FlavorText" Type="nvarchar(max)" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" />
+    <Property Name="StoreUrl" Type="nvarchar(max)" />
+    <Property Name="HighPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="MedianPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="LowPrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CardSubTypes">
+    <Key>
+      <PropertyRef Name="CardSubTypeId" />
+    </Key>
+    <Property Name="CardSubTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SubTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CardTypes">
+    <Key>
+      <PropertyRef Name="CardTypeId" />
+    </Key>
+    <Property Name="CardTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Colors">
+    <Key>
+      <PropertyRef Name="ColorId" />
+    </Key>
+    <Property Name="ColorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ColorName" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Sets">
+    <Key>
+      <PropertyRef Name="SetId" />
+    </Key>
+    <Property Name="SetId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SetName" Type="varchar" MaxLength="255" />
+    <Property Name="Border" Type="nvarchar(max)" />
+    <Property Name="SetType" Type="nvarchar(max)" />
+    <Property Name="Url" Type="nvarchar(max)" />
+    <Property Name="SetNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="SubTypes">
+    <Key>
+      <PropertyRef Name="SubTypeId" />
+    </Key>
+    <Property Name="SubTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubTypeName" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__CardColor__CardI__65370702">
+    <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+    <End Role="CardColors" Type="Self.CardColors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="CardColors">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardColor__Color__662B2B3B">
+    <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
+    <End Role="CardColors" Type="Self.CardColors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="ColorId" />
+      </Principal>
+      <Dependent Role="CardColors">
+        <PropertyRef Name="ColorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardSets__CardId__690797E6">
+    <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+    <End Role="CardSets" Type="Self.CardSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="CardSets">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardSets__SetId__69FBBC1F">
+    <End Role="Sets" Type="Self.Sets" Multiplicity="1" />
+    <End Role="CardSets" Type="Self.CardSets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sets">
+        <PropertyRef Name="SetId" />
+      </Principal>
+      <Dependent Role="CardSets">
+        <PropertyRef Name="SetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardSubTy__CardI__6166761E">
+    <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+    <End Role="CardSubTypes" Type="Self.CardSubTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="CardSubTypes">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardSubTy__SubTy__625A9A57">
+    <End Role="SubTypes" Type="Self.SubTypes" Multiplicity="1" />
+    <End Role="CardSubTypes" Type="Self.CardSubTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubTypes">
+        <PropertyRef Name="SubTypeId" />
+      </Principal>
+      <Dependent Role="CardSubTypes">
+        <PropertyRef Name="SubTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardTypes__CardI__5D95E53A">
+    <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+    <End Role="CardTypes" Type="Self.CardTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cards">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="CardTypes">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardTypes__TypeI__5E8A0973">
+    <End Role="Types" Type="Self.Types" Multiplicity="1" />
+    <End Role="CardTypes" Type="Self.CardTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="CardTypes">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MTG_DBModelStoreContainer">
+    <EntitySet Name="CardColors" EntityType="Self.CardColors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardSets" EntityType="Self.CardSets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardSubTypes" EntityType="Self.CardSubTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CardTypes" EntityType="Self.CardTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sets" EntityType="Self.Sets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubTypes" EntityType="Self.SubTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CardColor__CardI__65370702" Association="Self.FK__CardColor__CardI__65370702">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardColors" EntitySet="CardColors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardColor__Color__662B2B3B" Association="Self.FK__CardColor__Color__662B2B3B">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="CardColors" EntitySet="CardColors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardSets__CardId__690797E6" Association="Self.FK__CardSets__CardId__690797E6">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardSets" EntitySet="CardSets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardSets__SetId__69FBBC1F" Association="Self.FK__CardSets__SetId__69FBBC1F">
+      <End Role="Sets" EntitySet="Sets" />
+      <End Role="CardSets" EntitySet="CardSets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardSubTy__CardI__6166761E" Association="Self.FK__CardSubTy__CardI__6166761E">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardSubTypes" EntitySet="CardSubTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardSubTy__SubTy__625A9A57" Association="Self.FK__CardSubTy__SubTy__625A9A57">
+      <End Role="SubTypes" EntitySet="SubTypes" />
+      <End Role="CardSubTypes" EntitySet="CardSubTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardTypes__CardI__5D95E53A" Association="Self.FK__CardTypes__CardI__5D95E53A">
+      <End Role="Cards" EntitySet="Cards" />
+      <End Role="CardTypes" EntitySet="CardTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardTypes__TypeI__5E8A0973" Association="Self.FK__CardTypes__TypeI__5E8A0973">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="CardTypes" EntitySet="CardTypes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

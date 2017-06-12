@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ee38748ced646898041c49d3358539a" Name="Diagram1">
+        <EntityTypeShape EntityType="MTG_DBModel.CardColor" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.Card" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.CardSet" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.CardSubType" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.CardType" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.Color" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.Set" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.SubType" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTG_DBModel.Type" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardColor__CardI__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardColor__Color__662B2B3B" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardSets__CardId__690797E6" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardSubTy__CardI__6166761E" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardTypes__CardI__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardSets__SetId__69FBBC1F" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardSubTy__SubTy__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="MTG_DBModel.FK__CardTypes__TypeI__5E8A0973" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
