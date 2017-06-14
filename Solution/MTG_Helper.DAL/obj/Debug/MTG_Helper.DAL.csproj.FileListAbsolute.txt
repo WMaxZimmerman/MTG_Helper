@@ -21,3 +21,17 @@ C:\Users\Max\Documents\stuff\MTG_Helper\MTG_Helper.DAL\bin\Debug\System.Net.Http
 C:\Users\Max\Documents\stuff\MTG_Helper\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.dll
 C:\Users\Max\Documents\stuff\MTG_Helper\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.pdb
 C:\Users\Max\Documents\stuff\MTG_Helper\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.csprojResolveAssemblyReference.cache
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\MTG_Helper.DAL.dll.config
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\MTG_Helper.DAL.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\MTG_Helper.DAL.pdb
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\EntityFramework.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\Newtonsoft.Json.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\System.Net.Http.Formatting.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\EntityFramework.xml
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\Newtonsoft.Json.xml
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\System.Net.Http.Formatting.xml
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.csprojResolveAssemblyReference.cache
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.dll
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.pdb
