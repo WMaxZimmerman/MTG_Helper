@@ -126,6 +126,7 @@ namespace MTG_Helper.Console
                 "update sets",
                 "update cards",
                 "update all",
+                "build",
                 "close"
             };
         }
