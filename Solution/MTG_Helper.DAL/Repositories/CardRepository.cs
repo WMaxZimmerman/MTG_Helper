@@ -114,61 +114,25 @@ namespace MTG_Helper.DAL.Repositories
         {
             using (var db = new MtgEntities())
             {
-
                 try
                 {
                     format = format.ToLower();
-                    var legalCards = db.Cards.ToList();
-                    if (format == "commander")
+           
+                    switch (format)
                     {
-                        legalCards = legalCards 
-                            .Where(c => c.Commander == "legal")
-                            .ToList();
+                        case "commander":
+                            return CardMapper.Map(db.Cards.Where(c => c.Commander == "legal")).ToList();
+                        case "standard":
+                            return CardMapper.Map(db.Cards.Where(c => c.Standard == "legal")).ToList();
+                        case "legacy":
+                            return CardMapper.Map(db.Cards.Where(c => c.Legacy == "legal")).ToList();
+                        case "vintage":
+                            return CardMapper.Map(db.Cards.Where(c => c.Vintage == "legal")).ToList();
+                        case "modern":
+                            return CardMapper.Map(db.Cards.Where(c => c.Modern == "legal")).ToList();
+                        default:
+                            return new List<CardDm>();
                     }
-                    else
-                    {
-                        if (format == "standard")
-                        {
-                            legalCards = legalCards
-                                .Where(c => c.Standard == "legal")
-                                .ToList();
-                        }
-                        else
-                        {
-                            if (format == "legacy")
-                            {
-                                legalCards = legalCards
-                                    .Where(c => c.Legacy == "legal")
-                                    .ToList();
-                            }
-                            else
-                            {
-                                if (format == "vintage")
-                                {
-                                    legalCards = legalCards
-                                        .Where(c => c.Vintage == "legal")
-                                        .ToList();
-                                }
-                                else
-                                {
-                                    if (format == "modern")
-                                    {
-                                        legalCards = legalCards
-                                            .Where(c => c.Modern == "legal")
-                                            .ToList();
-                                    }
-                                    else
-                                    {
-                                        return new List<CardDm>();
-                                    }
-                                }
-                            }
-                        }
-                        
-                    }
-
-
-                    return CardMapper.Map(legalCards).ToList();
                 }
                 catch (Exception e)
                 {
