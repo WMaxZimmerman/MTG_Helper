@@ -64,7 +64,7 @@ namespace MTG_Helper.DAL.Repositories
             {
                 try
                 {
-                    return CardMapper.Map(db.Cards.ToList());
+                    return CardMapper.Map(db.Cards).ToList();
                 }
                 catch (Exception e)
                 {
@@ -88,7 +88,7 @@ namespace MTG_Helper.DAL.Repositories
                         .Where(c => IsWithinCommanderColors(c.Colors.Replace(" ", "").Split(',').ToList(), commander.Colors))
                         .ToList();
 
-                    return CardMapper.Map(legalCards);
+                    return CardMapper.Map(legalCards).ToList();
                 }
                 catch (Exception e)
                 {
@@ -108,6 +108,11 @@ namespace MTG_Helper.DAL.Repositories
             }
 
             return true;
+        }
+
+        public static List<CardDm> GetLegalCardsForGivenFormat(string format)
+        {
+            return new List<CardDm>();
         }
     }
 }

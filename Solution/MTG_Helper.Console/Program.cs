@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MTG_Helper.DAL.DALs;
-using MTG_Helper.DAL.DomainModels.ApiModels;
-using MTG_Helper.DAL.Mappers;
 using MTG_Helper.DAL.Repositories;
 
 namespace MTG_Helper.Console
@@ -103,17 +102,18 @@ namespace MTG_Helper.Console
             var commanderName = System.Console.ReadLine();
             var commaderCard = CardRepository.GetCardByName(commanderName);
 
-            if (commaderCard == null)
+            if (commaderCard != null)
             {
-            }
-            else
-            {
-                var cards = CardRepository.GetAllCardsLegalForGivenCommander(commaderCard);
+                var cards = CardRepository.GetAllCardsLegalForGivenCommander(commaderCard)
+                    .Where(c => c.SubTypes.Contains("snake") || c.RulesText.Contains("snake"));
 
                 foreach (var card in cards)
                 {
                     System.Console.WriteLine($"[{card.Cost}] {card.Name}");
                 }
+
+                System.Console.WriteLine();
+                System.Console.WriteLine($"Found {cards.Count()} cards.");
             }
 
             System.Console.ReadLine();

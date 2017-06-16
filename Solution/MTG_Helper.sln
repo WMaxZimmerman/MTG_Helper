@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.Console", "MTG_Helper.Console\MTG_Helper.Console.csproj", "{784C412D-57C6-4523-A253-B19B0C7D03DE}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.WebApi", "MTG_Helper.WebApi\MTG_Helper.WebApi.csproj", "{51F6A2CD-0ED5-4CFC-B583-BC4D02C38D9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.WebUi", "MTG_Helper.WebUi\MTG_Helper.WebUi.csproj", "{3EFFFD57-E542-46AA-B5FA-90CF31862588}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2F4C3622-0E6C-433F-91AC-BECFF10EB06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.Tests", "MTG_Helper.Tests\MTG_Helper.Tests.csproj", "{9762AF78-D304-4FEF-AD21-1ADF827DA2E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +37,15 @@ Global
 		{3EFFFD57-E542-46AA-B5FA-90CF31862588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EFFFD57-E542-46AA-B5FA-90CF31862588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EFFFD57-E542-46AA-B5FA-90CF31862588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9762AF78-D304-4FEF-AD21-1ADF827DA2E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9762AF78-D304-4FEF-AD21-1ADF827DA2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9762AF78-D304-4FEF-AD21-1ADF827DA2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9762AF78-D304-4FEF-AD21-1ADF827DA2E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9762AF78-D304-4FEF-AD21-1ADF827DA2E7} = {2F4C3622-0E6C-433F-91AC-BECFF10EB06A}
 	EndGlobalSection
 EndGlobal

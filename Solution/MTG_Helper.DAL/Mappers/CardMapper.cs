@@ -71,7 +71,7 @@ namespace MTG_Helper.DAL.Mappers
             return dm;
         }
 
-        public static List<CardDm> Map(List<Card> emList)
+        public static IEnumerable<CardDm> Map(IEnumerable<Card> emList)
         {
             return emList.Select(Map).ToList();
         }

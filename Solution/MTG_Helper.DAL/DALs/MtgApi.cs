@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using MTG_Helper.DAL.DomainModels.ApiModels;
@@ -11,12 +8,12 @@ namespace MTG_Helper.DAL.DALs
 {
     public static class MtgApi
     {
-        private const string URL = "https://api.deckbrew.com/mtg";
+        private const string Url = "https://api.deckbrew.com/mtg";
 
         public static List<CardApiDm> GetCardsByPage(int pageNumber)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri($"{URL}/cards");
+            client.BaseAddress = new Uri($"{Url}/cards");
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -63,7 +60,7 @@ namespace MTG_Helper.DAL.DALs
 
         public static List<SetApiDm> GetAllSets()
         {
-            var client = new HttpClient {BaseAddress = new Uri($"{URL}/sets")};
+            var client = new HttpClient {BaseAddress = new Uri($"{Url}/sets")};
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
