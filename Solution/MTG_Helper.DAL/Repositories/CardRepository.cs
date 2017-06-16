@@ -102,12 +102,7 @@ namespace MTG_Helper.DAL.Repositories
 
         private static bool IsWithinCommanderColors(IEnumerable<string> cardColors, ICollection<string> commanderColors)
         {
-            foreach (var cardColor in cardColors)
-            {
-                if (!commanderColors.Contains(cardColor)) return false;
-            }
-
-            return true;
+            return cardColors.All(commanderColors.Contains);
         }
 
         public static List<CardDm> GetLegalCardsForGivenFormat(string format)

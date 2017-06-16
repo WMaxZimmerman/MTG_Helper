@@ -73,7 +73,7 @@ namespace MTG_Helper.DAL.Mappers
 
         public static IEnumerable<CardDm> Map(IEnumerable<Card> emList)
         {
-            return emList.Select(Map).ToList();
+            return emList.Select(Map);
         }
 
         private static List<CardSet> MapSets(CardApiDm apiDm)
