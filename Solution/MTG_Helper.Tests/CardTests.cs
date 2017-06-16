@@ -26,5 +26,14 @@ namespace MTG_Helper.Tests
 
             Assert.IsTrue(cards.Count == 1249);
         }
+
+        [Test]
+        public void GetLegalCardsForGivenFormatReturnsEmptyListWhenGivenInvalidFormat()
+        {
+            var format = "badFormat";
+            List<CardDm> cards = CardRepository.GetLegalCardsForGivenFormat(format);
+
+            Assert.IsTrue(cards.Count == 0);
+        }
     }
 }
