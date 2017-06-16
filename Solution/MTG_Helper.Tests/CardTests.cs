@@ -21,10 +21,10 @@ namespace MTG_Helper.Tests
         [Test]
         public void AbleToRetrieveLegalCards()
         {
-            var format = "commander";
+            var format = "staNdard";
             List<CardDm> cards = CardRepository.GetLegalCardsForGivenFormat(format);
 
-            Assert.IsTrue(cards.Count == 16385);
+            Assert.IsTrue(cards.Count == 1249);
         }
     }
 }

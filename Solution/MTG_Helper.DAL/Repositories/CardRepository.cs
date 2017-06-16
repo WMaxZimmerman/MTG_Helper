@@ -112,7 +112,72 @@ namespace MTG_Helper.DAL.Repositories
 
         public static List<CardDm> GetLegalCardsForGivenFormat(string format)
         {
-            return new List<CardDm>();
+            using (var db = new MtgEntities())
+            {
+
+                try
+                {
+                    format = format.ToLower();
+                    var legalCards = db.Cards.ToList();
+                    if (format == "commander")
+                    {
+                        legalCards = legalCards 
+                            .Where(c => c.Commander == "legal")
+                            .ToList();
+                    }
+                    else
+                    {
+                        if (format == "standard")
+                        {
+                            legalCards = legalCards
+                                .Where(c => c.Standard == "legal")
+                                .ToList();
+                        }
+                        else
+                        {
+                            if (format == "legacy")
+                            {
+                                legalCards = legalCards
+                                    .Where(c => c.Legacy == "legal")
+                                    .ToList();
+                            }
+                            else
+                            {
+                                if (format == "vintage")
+                                {
+                                    legalCards = legalCards
+                                        .Where(c => c.Vintage == "legal")
+                                        .ToList();
+                                }
+                                else
+                                {
+                                    if (format == "modern")
+                                    {
+                                        legalCards = legalCards
+                                            .Where(c => c.Modern == "legal")
+                                            .ToList();
+                                    }
+                                    else
+                                    {
+                                        return new List<CardDm>();
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+
+
+                    return CardMapper.Map(legalCards).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Unable to retreive all cards.");
+                    Console.WriteLine(e);
+                    return new List<CardDm>();
+                }
+            }
         }
     }
 }
