@@ -11,6 +11,9 @@ namespace MTG_Helper.DAL.Mappers
     {
         public static Card Map(CardApiDm apiDm)
         {
+            if (apiDm.Supertypes == null) apiDm.Supertypes = new List<string>();
+            apiDm.Supertypes.AddRange(apiDm.Types);
+
             var em = new Card
             {
                 CardId = apiDm.Id,
@@ -27,7 +30,7 @@ namespace MTG_Helper.DAL.Mappers
                 RulesText = apiDm.Text,
                 StoreUrl = apiDm.Store_Url,
                 Url = apiDm.Url,
-                Types = string.Join(", ", apiDm.Types ?? new List<string>()),
+                Types = string.Join(", ", apiDm.Supertypes),
                 SubTypes = string.Join(", ", apiDm.Subtypes ?? new List<string>()),
                 Colors = string.Join(", ", apiDm.Colors ?? new List<string>()),
                 CardSets = MapSets(apiDm).ToList()

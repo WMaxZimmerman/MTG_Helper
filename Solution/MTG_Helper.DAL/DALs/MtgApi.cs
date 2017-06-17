@@ -12,15 +12,14 @@ namespace MTG_Helper.DAL.DALs
 
         public static List<CardApiDm> GetCardsByPage(int pageNumber)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri($"{Url}/cards");
+            var client = new HttpClient {BaseAddress = new Uri($"{Url}/cards")};
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
             // List data response.
-            HttpResponseMessage response = client.GetAsync($"?page={pageNumber}").Result;  // Blocking call!
+            var response = client.GetAsync($"?page={pageNumber}").Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body. Blocking!

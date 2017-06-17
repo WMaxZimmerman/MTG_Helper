@@ -20,6 +20,8 @@ namespace MTG_Helper.DAL.DomainModels.ApiModels
 
         public List<string> Colors { get; set; }
 
+        public List<string> Supertypes { get; set; }
+
         public List<string> Types { get; set; }
 
         public List<string> Subtypes { get; set; }

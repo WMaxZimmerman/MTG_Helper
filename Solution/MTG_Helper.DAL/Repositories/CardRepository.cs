@@ -138,5 +138,48 @@ namespace MTG_Helper.DAL.Repositories
                 }
             }
         }
+
+        public static IEnumerable<CardDm> GetAllCardsByGivenSubtype(string subtype)
+        {
+            using (var db = new MtgEntities())
+            {
+                try
+                {
+                    var legalCards = db.Cards
+                        .Where(c => c.SubTypes.Contains(subtype));
+
+                    return CardMapper.Map(legalCards).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Unable to retreive all cards.");
+                    Console.WriteLine(e);
+                    return new List<CardDm>();
+                }
+            }
+        }
+
+        public static List<CardDm> GetCommandersByPartialName(string cardName)
+        {
+            using (var db = new MtgEntities())
+            {
+                try
+                {
+                    cardName = cardName.ToLower();
+                    var commanders = db.Cards
+                        .Where(c => c.Types.Contains("Legendary") && c.CardName.ToLower().Contains(cardName));
+
+                    return CardMapper.Map(commanders).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Unable to retreive all cards.");
+                    Console.WriteLine(e);
+                    return new List<CardDm>();
+                }
+            }
+        }
     }
 }
