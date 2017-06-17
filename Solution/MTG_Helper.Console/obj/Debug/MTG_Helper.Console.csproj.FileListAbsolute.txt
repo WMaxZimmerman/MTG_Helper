@@ -44,3 +44,9 @@ C:\git\MTG_Helper\Solution\MTG_Helper.Console\bin\Debug\System.Net.Http.Formatti
 C:\git\MTG_Helper\Solution\MTG_Helper.Console\obj\Debug\MTG_Helper.Console.csprojResolveAssemblyReference.cache
 C:\git\MTG_Helper\Solution\MTG_Helper.Console\obj\Debug\MTG_Helper.Console.exe
 C:\git\MTG_Helper\Solution\MTG_Helper.Console\obj\Debug\MTG_Helper.Console.pdb
+C:\tools\MTG_Helper.Console.exe.config
+C:\tools\MTG_Helper.Console.exe
+C:\tools\MTG_Helper.Console.pdb
+C:\tools\MtgHelper\MTG_Helper.Console.exe.config
+C:\tools\MtgHelper\MTG_Helper.Console.exe
+C:\tools\MtgHelper\MTG_Helper.Console.pdb

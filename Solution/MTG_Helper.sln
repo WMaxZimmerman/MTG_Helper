@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.Console", "MTG_Helper.Console\MTG_Helper.Console.csproj", "{784C412D-57C6-4523-A253-B19B0C7D03DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mtg", "MTG_Helper.Console\mtg.csproj", "{784C412D-57C6-4523-A253-B19B0C7D03DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTG_Helper.DAL", "MTG_Helper.DAL\MTG_Helper.DAL.csproj", "{A9ED6F6B-6194-4370-8013-181D16BF2C68}"
 EndProject

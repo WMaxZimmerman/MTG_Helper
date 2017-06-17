@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{784C412D-57C6-4523-A253-B19B0C7D03DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MTG_Helper.Console</RootNamespace>
-    <AssemblyName>MTG_Helper.Console</AssemblyName>
+    <RootNamespace>mtg</RootNamespace>
+    <AssemblyName>mtg</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\tools\MtgHelper\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

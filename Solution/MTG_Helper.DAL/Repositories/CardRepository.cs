@@ -22,9 +22,11 @@ namespace MTG_Helper.DAL.Repositories
                 }
                 catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine();
                     Console.WriteLine($"Unable to save the cardApi '{cardApi.Name}' Excpetion:");
                     Console.WriteLine(e);
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
         }
@@ -160,7 +162,7 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static List<CardDm> GetCommandersByPartialName(string cardName)
+        public static IEnumerable<CardDm> GetCommandersByPartialName(string cardName)
         {
             using (var db = new MtgEntities())
             {

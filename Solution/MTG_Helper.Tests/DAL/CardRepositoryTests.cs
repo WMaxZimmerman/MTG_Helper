@@ -22,9 +22,9 @@ namespace MTG_Helper.Tests.DAL
         public void AbleToRetrieveCommanderListByPartialName()
         {
             const string cardName = "seshiro";
-            List<CardDm> cards = CardRepository.GetCommandersByPartialName(cardName);
+            var cards = CardRepository.GetCommandersByPartialName(cardName);
 
-            Assert.IsTrue(cards.Count() != 0);
+            Assert.IsTrue(cards.Count() == 3);
         }
 
         [Test]

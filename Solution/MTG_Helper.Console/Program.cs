@@ -5,55 +5,69 @@ using MTG_Helper.DAL.Repositories;
 
 namespace MTG_Helper.Console
 {
-    public class Program
+    class Program
     {
-
         static void Main(string[] args)
         {
-            var action = "";
-            while (action != "close")
+            if (args.Length == 0)
             {
-                action = GetInput();
+                System.Console.WriteLine("Please enter an argument.  Use 'options' to see available arguments.");
+                return;
+            }
 
-                switch (action)
-                {
-                    case "update sets":
-                        UpdateSetsFromApi();
-                        break;
-                    case "update cards":
-                        UdpateCardsFromApi();
-                        break;
-                    case "update all":
-                        UpdateDatabaseFromApi();
-                        break;
-                    case "list":
-                        OutputAllCards();
-                        break;
-                    case "close":
-                        break;
-                    case "build":
-                        BuildCommanderDeck();
-                        break;
-                    default:
-                        System.Console.WriteLine("Invalid Option press enter to try again");
-                        System.Console.ReadLine();
-                        break;
-                }
+            var action = args[0].ToLower();
+
+            switch (action)
+            {
+                case "update":
+                    Update(args);
+                    break;
+                case "list":
+                    OutputAllCards();
+                    break;
+                case "build":
+                    BuildCommanderDeck();
+                    break;
+                case "options":
+                    ListOptions();
+                    break;
+                default:
+                    System.Console.WriteLine("Invalid Option press enter to try again");
+                    break;
             }
         }
 
-        private static string GetInput()
+        private static void ListOptions()
         {
-            System.Console.Clear();
-            System.Console.WriteLine("What Action Would you like to perform?");
-
             foreach (var option in Options())
             {
                 System.Console.WriteLine($"-{option}");
             }
-            System.Console.WriteLine();
-            System.Console.WriteLine("Please note that sets should be updated before cards and All will update both.");
-            return System.Console.ReadLine();
+        }
+
+        private static void Update(string[] args)
+        {
+            if (args.Length > 1)
+            {
+                var updateArg = args[1].ToLower();
+
+                switch (updateArg)
+                {
+                    case "sets":
+                        UpdateSetsFromApi();
+                        break;
+                    case "cards":
+                        UdpateCardsFromApi();
+                        break;
+                    default:
+                        System.Console.WriteLine($"I don't Know how to update {updateArg}. Please try again.");
+                        break;
+                }
+            }
+            else
+            {
+                UpdateDatabaseFromApi();
+            }
         }
 
         private static void UpdateDatabaseFromApi()
@@ -67,8 +81,6 @@ namespace MTG_Helper.Console
             System.Console.WriteLine("Starting Sets:");
             SetRepository.InsertSets(MtgApi.GetAllSets());
             System.Console.WriteLine("All Sets Completed Successfully.");
-            System.Console.WriteLine("Press Enter to Continue.");
-            System.Console.ReadLine();
         }
 
         private static void UdpateCardsFromApi()
@@ -77,10 +89,6 @@ namespace MTG_Helper.Console
             var cards = MtgApi.GetCardsByPageRange(0, 400);
 
             CardRepository.InsertCards(cards);
-
-            System.Console.WriteLine();
-            System.Console.WriteLine("Press Enter to Continue.");
-            System.Console.ReadLine();
         }
 
         private static void OutputAllCards()
@@ -91,8 +99,6 @@ namespace MTG_Helper.Console
             {
                 System.Console.WriteLine($"[{card.Cost}] {card.Name}");
             }
-
-            System.Console.ReadLine();
         }
 
         private static void BuildCommanderDeck()
@@ -115,25 +121,18 @@ namespace MTG_Helper.Console
                 System.Console.WriteLine();
                 System.Console.WriteLine($"Found {cards.Count()} cards.");
             }
-
-            System.Console.ReadLine();
         }
 
         private static List<string> Options()
         {
             return new List<string>
             {
+                "update",
                 "update sets",
                 "update cards",
-                "update all",
                 "build",
-                "close"
+                "options"
             };
         }
-    }
-
-    public class DataObject
-    {
-        public string Name { get; set; }
     }
 }
