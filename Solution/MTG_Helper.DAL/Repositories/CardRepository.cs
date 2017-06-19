@@ -54,7 +54,6 @@ namespace MTG_Helper.DAL.Repositories
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Unable to find the card {cardName}.");
-                    Console.WriteLine(e);
                     return null;
                 }
             }
@@ -104,6 +103,8 @@ namespace MTG_Helper.DAL.Repositories
 
         private static bool IsWithinCommanderColors(IEnumerable<string> cardColors, ICollection<string> commanderColors)
         {
+            if (cardColors.Count() == 0) return true;
+
             return cardColors.All(commanderColors.Contains);
         }
 
@@ -171,6 +172,29 @@ namespace MTG_Helper.DAL.Repositories
                     cardName = cardName.ToLower();
                     var commanders = db.Cards
                         .Where(c => c.Types.Contains("Legendary") && c.CardName.ToLower().Contains(cardName));
+
+                    return CardMapper.Map(commanders).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Unable to retreive all cards.");
+                    Console.WriteLine(e);
+                    return new List<CardDm>();
+                }
+            }
+        }
+
+        public static IEnumerable<CardDm> FindTribalCommandersForType(string tribalType)
+        {
+            using (var db = new MtgEntities())
+            {
+                try
+                {
+                    tribalType = tribalType.ToLower();
+                    var commanders = db.Cards
+                        .Where(c => c.Types.Contains("Legendary") && 
+                        (c.SubTypes.ToLower().Contains(tribalType) || c.RulesText.ToLower().Contains(tribalType)));
 
                     return CardMapper.Map(commanders).ToList();
                 }

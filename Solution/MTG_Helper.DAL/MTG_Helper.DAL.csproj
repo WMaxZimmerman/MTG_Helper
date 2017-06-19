@@ -107,6 +107,7 @@
     <Compile Include="DomainModels\CardLegalityDm.cs" />
     <Compile Include="DomainModels\CardPriceDm.cs" />
     <Compile Include="DomainModels\CardSetDm.cs" />
+    <Compile Include="DomainModels\DeckDm.cs" />
     <Compile Include="Mappers\CardMapper.cs" />
     <Compile Include="Mappers\ColorMapper.cs" />
     <Compile Include="Mappers\SetMapper.cs" />

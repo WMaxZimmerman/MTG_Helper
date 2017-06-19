@@ -55,14 +55,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ConsoleUtility.cs" />
+    <Compile Include="Controllers\FindCommand.cs" />
+    <Compile Include="Controllers\UpdateCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Output.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MTG_Helper.BLL\MTG_Helper.BLL.csproj">
+      <Project>{1a16132d-7aa0-4dc2-b4c0-587f3613f4ab}</Project>
+      <Name>MTG_Helper.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MTG_Helper.DAL\MTG_Helper.DAL.csproj">
       <Project>{a9ed6f6b-6194-4370-8013-181d16bf2c68}</Project>
       <Name>MTG_Helper.DAL</Name>

@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using mtg.Controllers;
+using mtg.Views;
+using MTG_Helper.BLL.BLLs;
 using MTG_Helper.DAL.DALs;
+using MTG_Helper.DAL.DomainModels;
 using MTG_Helper.DAL.Repositories;
 
 namespace MTG_Helper.Console
@@ -20,13 +25,13 @@ namespace MTG_Helper.Console
             switch (action)
             {
                 case "update":
-                    Update(args);
-                    break;
-                case "list":
-                    OutputAllCards();
+                    UpdateCommand.Update(args);
                     break;
                 case "build":
                     BuildCommanderDeck();
+                    break;
+                case "find":
+                    FindCommand.Find(args);
                     break;
                 case "options":
                     ListOptions();
@@ -44,83 +49,16 @@ namespace MTG_Helper.Console
                 System.Console.WriteLine($"-{option}");
             }
         }
-
-        private static void Update(string[] args)
-        {
-            if (args.Length > 1)
-            {
-                var updateArg = args[1].ToLower();
-
-                switch (updateArg)
-                {
-                    case "sets":
-                        UpdateSetsFromApi();
-                        break;
-                    case "cards":
-                        UdpateCardsFromApi();
-                        break;
-                    default:
-                        System.Console.WriteLine($"I don't Know how to update {updateArg}. Please try again.");
-                        break;
-                }
-            }
-            else
-            {
-                UpdateDatabaseFromApi();
-            }
-        }
-
-        private static void UpdateDatabaseFromApi()
-        {
-            UpdateSetsFromApi();
-            UdpateCardsFromApi();
-        }
-
-        private static void UpdateSetsFromApi()
-        {
-            System.Console.WriteLine("Starting Sets:");
-            SetRepository.InsertSets(MtgApi.GetAllSets());
-            System.Console.WriteLine("All Sets Completed Successfully.");
-        }
-
-        private static void UdpateCardsFromApi()
-        {
-            System.Console.WriteLine("Starting Cards:");
-            var cards = MtgApi.GetCardsByPageRange(0, 400);
-
-            CardRepository.InsertCards(cards);
-        }
-
-        private static void OutputAllCards()
-        {
-            var cards = CardRepository.GetAllCards();
-
-            foreach (var card in cards)
-            {
-                System.Console.WriteLine($"[{card.Cost}] {card.Name}");
-            }
-        }
-
+        
         private static void BuildCommanderDeck()
         {
             System.Console.Clear();
-            System.Console.WriteLine("Who is your commander?");
-            var commanderName = System.Console.ReadLine();
-            var commaderCard = CardRepository.GetCardByName(commanderName);
+            var deckName = ConsoleUtility.GetConsoleInput("What is the name of the new deck?");
+            var commanderName = ConsoleUtility.GetConsoleInput("Who will be the commander?");
+            var tribeType = ConsoleUtility.GetConsoleInput("What tribe are we building?");
 
-            if (commaderCard != null)
-            {
-                var cards = CardRepository.GetAllCardsLegalForGivenCommander(commaderCard)
-                    .Where(c => c.SubTypes.Contains("snake") || c.RulesText.Contains("snake"));
-
-                foreach (var card in cards)
-                {
-                    System.Console.WriteLine($"[{card.Cost}] {card.Name}");
-                }
-
-                System.Console.WriteLine();
-                System.Console.WriteLine($"Found {cards.Count()} cards.");
-            }
+            var deck = DeckBLL.BuildCommanderDeck(deckName, commanderName, tribeType);
+            DeckBLL.SaveDeck(deck);
         }
 
         private static List<string> Options()
@@ -131,6 +69,7 @@ namespace MTG_Helper.Console
                 "update sets",
                 "update cards",
                 "build",
+                "find",
                 "options"
             };
         }
