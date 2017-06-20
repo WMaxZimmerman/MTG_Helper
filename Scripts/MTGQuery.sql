@@ -8,6 +8,8 @@ Drop Table [dbo].[Sets]
 Drop Table [dbo].[Colors]
 Drop Table [dbo].[SubTypes]
 Drop Table [dbo].[Types]
+Drop Table [dbo].[DeckCards]
+Drop Table [dbo].[Deck]
 --*/
 
 CREATE TABLE [dbo].[Types] (
@@ -103,6 +105,25 @@ CREATE TABLE [dbo].[CardSets] (
     FOREIGN KEY (CardId) REFERENCES [dbo].[Cards](CardId),
     FOREIGN KEY (SetId) REFERENCES [dbo].[Sets](SetId)
 );
+
+CREATE TABLE [dbo].[Deck] (
+    [DeckName] varchar(255) NOT NULL PRIMARY KEY,
+	[Commander] varchar(255) NOT NULL,
+
+	--Foreign Keys
+	FOREIGN KEY (Commander) REFERENCES [dbo].[Cards](CardId)
+)
+
+CREATE TABLE [dbo].[DeckCards] (
+    [DeckCardsId] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    [DeckName] varchar(255) NOT NULL,
+	[CardId] varchar(255) NOT NULL,
+	[Quantity] int NOT NULL DEFAULT 1,
+
+	--Foreign Keys
+	FOREIGN KEY (DeckName) REFERENCES [dbo].[Deck](DeckName),	
+	FOREIGN KEY (CardId) REFERENCES [dbo].[Cards](CardId)
+)
 
 
 
