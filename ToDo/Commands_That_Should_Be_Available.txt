@@ -1,0 +1,8 @@
+mtg -deck -create "Scarecrow Test" -commander "Reaper King"
+mtg -deck -build "Scarecrow Test" -t "scarecrow"
+mtg -deck "Scarecrow Test" -stats
+mtg -deck "Scarecorw Test" -add "Sol Ring"
+mtg -deck "Scarecorw Test" -remove "Sol Ring"
+mtg -deck "Scarecorw Test" -output "c:/tools/MtgHelper/decks/Scarecrow_Test.txt" (-tappedOut/-store)
+mtg -deck "Scarecrow Test" -delete
+mtg -deck "Scarecrow Test" -rename "Scarecrow Renamed"

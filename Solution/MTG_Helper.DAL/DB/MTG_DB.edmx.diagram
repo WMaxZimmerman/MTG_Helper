@@ -22,6 +22,11 @@
         <AssociationConnector Association="MTG_DBModel.FK__CardSets__SetId__69FBBC1F" ManuallyRouted="false" />
         <AssociationConnector Association="MTG_DBModel.FK__CardSubTy__SubTy__625A9A57" ManuallyRouted="false" />
         <AssociationConnector Association="MTG_DBModel.FK__CardTypes__TypeI__5E8A0973" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MTG_DBModel.Deck" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="MTG_DBModel.DeckCard" Width="1.5" PointX="5.25" PointY="11.125" />
+        <AssociationConnector Association="MTG_DBModel.FK__Deck__Commander__756D6ECB" />
+        <AssociationConnector Association="MTG_DBModel.FK__DeckCards__CardI__7A3223E8" />
+        <AssociationConnector Association="MTG_DBModel.FK__DeckCards__DeckN__793DFFAF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

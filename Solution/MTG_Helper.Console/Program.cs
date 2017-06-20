@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using mtg.Controllers;
-using mtg.Views;
+using mtg.Models;
 using MTG_Helper.BLL.BLLs;
-using MTG_Helper.DAL.DALs;
-using MTG_Helper.DAL.DomainModels;
-using MTG_Helper.DAL.Repositories;
 
 namespace MTG_Helper.Console
 {
@@ -19,27 +14,52 @@ namespace MTG_Helper.Console
                 System.Console.WriteLine("Please enter an argument.  Use 'options' to see available arguments.");
                 return;
             }
+            var arguments = SetArguments(args);
 
-            var action = args[0].ToLower();
-
-            switch (action)
+            switch (arguments[0].Command)
             {
-                case "update":
+                case "-update":
                     UpdateCommand.Update(args);
                     break;
-                case "build":
-                    BuildCommanderDeck();
-                    break;
-                case "find":
+                case "-find":
                     FindCommand.Find(args);
                     break;
-                case "options":
+                case "-options":
                     ListOptions();
+                    break;
+                case "-deck":
+                    DeckController.PerformDeckCommand(arguments);
                     break;
                 default:
                     System.Console.WriteLine("Invalid Option press enter to try again");
                     break;
             }
+        }
+
+        private static List<CommandLineArguments> SetArguments(string[] args)
+        {
+            var arguments = new List<CommandLineArguments>();
+            CommandLineArguments tempArg = null;
+
+            for (var i = 0; i < args.Length; i++)
+            {
+                if (args[i].StartsWith("-"))
+                {
+                    if (tempArg != null) arguments.Add(tempArg);
+                    tempArg = new CommandLineArguments
+                    {
+                        Command = args[i],
+                        Order = arguments.Count + 1
+                    };
+                }
+                else
+                {
+                    tempArg.Value = args[i];
+                }
+            }
+            arguments.Add(tempArg);
+
+            return arguments;
         }
 
         private static void ListOptions()
@@ -50,17 +70,6 @@ namespace MTG_Helper.Console
             }
         }
         
-        private static void BuildCommanderDeck()
-        {
-            System.Console.Clear();
-            var deckName = ConsoleUtility.GetConsoleInput("What is the name of the new deck?");
-            var commanderName = ConsoleUtility.GetConsoleInput("Who will be the commander?");
-            var tribeType = ConsoleUtility.GetConsoleInput("What tribe are we building?");
-
-            var deck = DeckBLL.BuildCommanderDeck(deckName, commanderName, tribeType);
-            DeckBLL.SaveDeck(deck);
-        }
-
         private static List<string> Options()
         {
             return new List<string>

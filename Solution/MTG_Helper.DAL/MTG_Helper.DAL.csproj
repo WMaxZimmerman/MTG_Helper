@@ -74,6 +74,12 @@
     <Compile Include="DB\Color.cs">
       <DependentUpon>MTG_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\Deck.cs">
+      <DependentUpon>MTG_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DeckCard.cs">
+      <DependentUpon>MTG_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\MTG_DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,11 +116,13 @@
     <Compile Include="DomainModels\DeckDm.cs" />
     <Compile Include="Mappers\CardMapper.cs" />
     <Compile Include="Mappers\ColorMapper.cs" />
+    <Compile Include="Mappers\DeckMapper.cs" />
     <Compile Include="Mappers\SetMapper.cs" />
     <Compile Include="Mappers\SubTypeMapper.cs" />
     <Compile Include="Mappers\TypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CardRepository.cs" />
+    <Compile Include="Repositories\DeckRepository.cs" />
     <Compile Include="Repositories\SetRepository.cs" />
   </ItemGroup>
   <ItemGroup>

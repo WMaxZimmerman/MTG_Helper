@@ -32,5 +32,7 @@ namespace MTG_Helper.DAL.DomainModels
         public CardLegalityDm Legality { get; set; }
 
         public List<CardSetDm> Sets { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

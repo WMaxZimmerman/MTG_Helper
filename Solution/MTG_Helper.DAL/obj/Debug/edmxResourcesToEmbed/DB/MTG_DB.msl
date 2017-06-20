@@ -106,5 +106,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Decks">
+      <EntityTypeMapping TypeName="MTG_DBModel.Deck">
+        <MappingFragment StoreEntitySet="Deck">
+          <ScalarProperty Name="Commander" ColumnName="Commander" />
+          <ScalarProperty Name="DeckName" ColumnName="DeckName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeckCards">
+      <EntityTypeMapping TypeName="MTG_DBModel.DeckCard">
+        <MappingFragment StoreEntitySet="DeckCards">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="DeckName" ColumnName="DeckName" />
+          <ScalarProperty Name="DeckCardsId" ColumnName="DeckCardsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
