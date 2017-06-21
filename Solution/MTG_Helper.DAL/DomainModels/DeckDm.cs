@@ -9,6 +9,8 @@ namespace MTG_Helper.DAL.DomainModels
             Cards = new List<CardDm>();
         }
 
+        public int Id { get; set; }
+
         public string DeckName { get; set; }
 
         public CardDm Commander { get; set; }

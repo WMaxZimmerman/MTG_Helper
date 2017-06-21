@@ -15,7 +15,7 @@ namespace MTG_Helper.DAL.DB
     public partial class DeckCard
     {
         public int DeckCardsId { get; set; }
-        public string DeckName { get; set; }
+        public int DeckId { get; set; }
         public string CardId { get; set; }
         public int Quantity { get; set; }
     

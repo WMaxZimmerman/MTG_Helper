@@ -70,7 +70,7 @@ namespace MTG_Helper.Console
             }
         }
         
-        private static List<string> Options()
+        private static IEnumerable<string> Options()
         {
             return new List<string>
             {

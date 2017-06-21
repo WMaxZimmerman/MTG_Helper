@@ -20,6 +20,7 @@ namespace MTG_Helper.DAL.DB
             this.DeckCards = new HashSet<DeckCard>();
         }
     
+        public int DeckId { get; set; }
         public string DeckName { get; set; }
         public string Commander { get; set; }
     

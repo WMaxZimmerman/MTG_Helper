@@ -35,8 +35,8 @@
     <NavigationProperty Name="CardSets" Relationship="Self.FK__CardSets__CardId__690797E6" FromRole="Cards" ToRole="CardSets" />
     <NavigationProperty Name="CardSubTypes" Relationship="Self.FK__CardSubTy__CardI__6166761E" FromRole="Cards" ToRole="CardSubTypes" />
     <NavigationProperty Name="CardTypes" Relationship="Self.FK__CardTypes__CardI__5D95E53A" FromRole="Cards" ToRole="CardTypes" />
-    <NavigationProperty Name="Decks" Relationship="MTG_DBModel.FK__Deck__Commander__756D6ECB" FromRole="Card" ToRole="Deck" />
-    <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__CardI__7A3223E8" FromRole="Card" ToRole="DeckCard" />
+    <NavigationProperty Name="Decks" Relationship="MTG_DBModel.FK__Deck__Commander__5D60DB10" FromRole="Card" ToRole="Deck" />
+    <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__CardI__6225902D" FromRole="Card" ToRole="DeckCard" />
   </EntityType>
   <EntityType Name="CardSet">
     <Key>
@@ -254,40 +254,41 @@
     </AssociationSet>
     <EntitySet Name="Decks" EntityType="MTG_DBModel.Deck" />
     <EntitySet Name="DeckCards" EntityType="MTG_DBModel.DeckCard" />
-    <AssociationSet Name="FK__Deck__Commander__756D6ECB" Association="MTG_DBModel.FK__Deck__Commander__756D6ECB">
+    <AssociationSet Name="FK__Deck__Commander__5D60DB10" Association="MTG_DBModel.FK__Deck__Commander__5D60DB10">
       <End Role="Card" EntitySet="Cards" />
       <End Role="Deck" EntitySet="Decks" />
     </AssociationSet>
-    <AssociationSet Name="FK__DeckCards__CardI__7A3223E8" Association="MTG_DBModel.FK__DeckCards__CardI__7A3223E8">
+    <AssociationSet Name="FK__DeckCards__CardI__6225902D" Association="MTG_DBModel.FK__DeckCards__CardI__6225902D">
       <End Role="Card" EntitySet="Cards" />
       <End Role="DeckCard" EntitySet="DeckCards" />
     </AssociationSet>
-    <AssociationSet Name="FK__DeckCards__DeckN__793DFFAF" Association="MTG_DBModel.FK__DeckCards__DeckN__793DFFAF">
+    <AssociationSet Name="FK__DeckCards__DeckI__61316BF4" Association="MTG_DBModel.FK__DeckCards__DeckI__61316BF4">
       <End Role="Deck" EntitySet="Decks" />
       <End Role="DeckCard" EntitySet="DeckCards" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Deck">
     <Key>
-      <PropertyRef Name="DeckName" />
+      <PropertyRef Name="DeckId" />
     </Key>
+    <Property Name="DeckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DeckName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Commander" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__Deck__Commander__756D6ECB" FromRole="Deck" ToRole="Card" />
-    <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__DeckN__793DFFAF" FromRole="Deck" ToRole="DeckCard" />
+    <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__Deck__Commander__5D60DB10" FromRole="Deck" ToRole="Card" />
+    <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__DeckI__61316BF4" FromRole="Deck" ToRole="DeckCard" />
   </EntityType>
   <EntityType Name="DeckCard">
     <Key>
       <PropertyRef Name="DeckCardsId" />
     </Key>
     <Property Name="DeckCardsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DeckName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DeckId" Type="Int32" Nullable="false" />
     <Property Name="CardId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__DeckCards__CardI__7A3223E8" FromRole="DeckCard" ToRole="Card" />
-    <NavigationProperty Name="Deck" Relationship="MTG_DBModel.FK__DeckCards__DeckN__793DFFAF" FromRole="DeckCard" ToRole="Deck" />
+    <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__DeckCards__CardI__6225902D" FromRole="DeckCard" ToRole="Card" />
+    <NavigationProperty Name="Deck" Relationship="MTG_DBModel.FK__DeckCards__DeckI__61316BF4" FromRole="DeckCard" ToRole="Deck" />
   </EntityType>
-  <Association Name="FK__Deck__Commander__756D6ECB">
+  <Association Name="FK__Deck__Commander__5D60DB10">
     <End Type="MTG_DBModel.Card" Role="Card" Multiplicity="1" />
     <End Type="MTG_DBModel.Deck" Role="Deck" Multiplicity="*" />
     <ReferentialConstraint>
@@ -299,7 +300,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DeckCards__CardI__7A3223E8">
+  <Association Name="FK__DeckCards__CardI__6225902D">
     <End Type="MTG_DBModel.Card" Role="Card" Multiplicity="1" />
     <End Type="MTG_DBModel.DeckCard" Role="DeckCard" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,15 +312,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DeckCards__DeckN__793DFFAF">
+  <Association Name="FK__DeckCards__DeckI__61316BF4">
     <End Type="MTG_DBModel.Deck" Role="Deck" Multiplicity="1" />
     <End Type="MTG_DBModel.DeckCard" Role="DeckCard" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Deck">
-        <PropertyRef Name="DeckName" />
+        <PropertyRef Name="DeckId" />
       </Principal>
       <Dependent Role="DeckCard">
-        <PropertyRef Name="DeckName" />
+        <PropertyRef Name="DeckId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

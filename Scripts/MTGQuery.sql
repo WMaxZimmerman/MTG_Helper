@@ -107,7 +107,8 @@ CREATE TABLE [dbo].[CardSets] (
 );
 
 CREATE TABLE [dbo].[Deck] (
-    [DeckName] varchar(255) NOT NULL PRIMARY KEY,
+    [DeckId] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    [DeckName] varchar(255) NOT NULL UNIQUE,
 	[Commander] varchar(255) NOT NULL,
 
 	--Foreign Keys
@@ -116,12 +117,12 @@ CREATE TABLE [dbo].[Deck] (
 
 CREATE TABLE [dbo].[DeckCards] (
     [DeckCardsId] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    [DeckName] varchar(255) NOT NULL,
+    [DeckId] int NOT NULL,
 	[CardId] varchar(255) NOT NULL,
 	[Quantity] int NOT NULL DEFAULT 1,
 
 	--Foreign Keys
-	FOREIGN KEY (DeckName) REFERENCES [dbo].[Deck](DeckName),	
+	FOREIGN KEY (DeckId) REFERENCES [dbo].[Deck](DeckId),	
 	FOREIGN KEY (CardId) REFERENCES [dbo].[Cards](CardId)
 )
 

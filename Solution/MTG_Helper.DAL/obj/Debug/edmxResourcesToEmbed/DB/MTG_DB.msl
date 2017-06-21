@@ -111,6 +111,7 @@
         <MappingFragment StoreEntitySet="Deck">
           <ScalarProperty Name="Commander" ColumnName="Commander" />
           <ScalarProperty Name="DeckName" ColumnName="DeckName" />
+          <ScalarProperty Name="DeckId" ColumnName="DeckId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,7 +120,7 @@
         <MappingFragment StoreEntitySet="DeckCards">
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="DeckName" ColumnName="DeckName" />
+          <ScalarProperty Name="DeckId" ColumnName="DeckId" />
           <ScalarProperty Name="DeckCardsId" ColumnName="DeckCardsId" />
         </MappingFragment>
       </EntityTypeMapping>

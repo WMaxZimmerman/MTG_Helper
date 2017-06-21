@@ -9,8 +9,8 @@ namespace mtg.Controllers
     {
         public static void PerformDeckCommand(List<CommandLineArguments> args)
         {
-            var message = "";
-            var success = true;
+            string message;
+            bool success;
 
             switch (args[1].Command)
             {
@@ -34,6 +34,25 @@ namespace mtg.Controllers
                         ? $"Deck Was Successfully Output To File '{args[1].Value}'."
                         : "An Error Occured While Attempting To Build Deck.";
                     Console.WriteLine(message);
+                    break;
+                case "-stats":
+                    var stats = DeckBLL.GetDeckStats(args[0].Value);
+                    Console.WriteLine();
+                    Console.WriteLine($"Deck: {stats.DeckName}");
+                    Console.WriteLine($"Creature Count: {stats.CreatureCount}");
+                    Console.WriteLine($"Land Count: {stats.LandCount}");
+                    break;
+                case "-add":
+                    DeckBLL.AddCardToDeck(args[0].Value, args[1].Value);
+                    Console.WriteLine($"Successfully Added the card '{args[1].Value}' the deck '{args[0].Value}'.");
+                    break;
+                case "-remove":
+                    DeckBLL.RemoveCardFromDeck(args[0].Value, args[1].Value);
+                    Console.WriteLine($"Successfully Removed the card '{args[1].Value}' the deck '{args[0].Value}'.");
+                    break;
+                case "-rename":
+                    DeckBLL.RenameDeck(args[0].Value, args[1].Value);
+                    Console.WriteLine($"Successfully Renamed the deck '{args[0].Value}' to '{args[1].Value}'.");
                     break;
                 default:
                     Console.WriteLine("Invalid Option press enter to try again");

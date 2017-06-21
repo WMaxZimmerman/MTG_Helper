@@ -11,6 +11,7 @@ namespace MTG_Helper.DAL.Mappers
         {
             var dm = new DeckDm
             {
+                Id = em.DeckId,
                 DeckName = em.DeckName,
                 Commander = CardMapper.Map(em.Card),
                 Cards = CardMap(em.DeckCards).ToList()
@@ -23,9 +24,10 @@ namespace MTG_Helper.DAL.Mappers
         {
             var em = new Deck
             {
+                DeckId = dm.Id,
                 DeckName = dm.DeckName,
                 Commander = dm.Commander.Id,
-                DeckCards = CardMap(dm.DeckName, dm.Cards).ToList()
+                DeckCards = CardMap(dm.Id, dm.Cards).ToList()
             };
 
             return em;
@@ -41,17 +43,17 @@ namespace MTG_Helper.DAL.Mappers
             return CardMapper.Map(em.Card);
         }
 
-        private static IEnumerable<DeckCard> CardMap(string deckName, IEnumerable<CardDm>dmList)
+        private static IEnumerable<DeckCard> CardMap(int deckId, IEnumerable<CardDm>dmList)
         {
-            return dmList.Select(d => CardMap(deckName, d));
+            return dmList.Select(d => CardMap(deckId, d));
         }
 
-        private static DeckCard CardMap(string deckName, CardDm card)
+        private static DeckCard CardMap(int deckId, CardDm card)
         {
             return new DeckCard
             {
                 DeckCardsId = 0,
-                DeckName = deckName,
+                DeckId = deckId,
                 CardId = card.Id,
                 Quantity = card.Quantity
             };

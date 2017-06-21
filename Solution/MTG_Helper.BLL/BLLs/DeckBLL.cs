@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using MTG_Helper.BLL.ViewModels;
 using MTG_Helper.DAL.DomainModels;
 using MTG_Helper.DAL.Repositories;
 
@@ -14,6 +15,7 @@ namespace MTG_Helper.BLL.BLLs
 
             var deck = new DeckDm
             {
+                Id = 0,
                 DeckName = deckName,
                 Commander = commander
             };
@@ -58,6 +60,37 @@ namespace MTG_Helper.BLL.BLLs
             }
 
             return true;
+        }
+
+        public static DeckStatsVm GetDeckStats(string deckName)
+        {
+            var deck = DeckRepository.GetDeck(deckName);
+
+            var deckStats = new DeckStatsVm
+            {
+                DeckName = deck.DeckName,
+                CreatureCount = deck.Cards.Count(c => c.Types.Contains("creature")) + 1,
+                LandCount = deck.Cards.Count(c => c.Types.Contains("land"))
+            };
+
+            return deckStats;
+        }
+
+        public static void AddCardToDeck(string deckName, string cardName)
+        {
+            DeckRepository.AddCardToDeck(deckName, cardName);
+        }
+
+        public static void RemoveCardFromDeck(string deckName, string cardName)
+        {
+            DeckRepository.RemoveCardFromDeck(deckName, cardName);
+        }
+
+        public static void RenameDeck(string deckName, string newName)
+        {
+            var deck = DeckRepository.GetDeck(deckName);
+            deck.DeckName = newName;
+            DeckRepository.UpdateDeckName(deck);
         }
     }
 }

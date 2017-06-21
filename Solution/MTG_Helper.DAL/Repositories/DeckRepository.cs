@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using MTG_Helper.DAL.DB;
 using MTG_Helper.DAL.DomainModels;
 using MTG_Helper.DAL.Mappers;
@@ -23,7 +24,7 @@ namespace MTG_Helper.DAL.Repositories
         {
             using (var db = new MtgEntities())
             {
-                var deck = DeckMapper.Map(db.Decks.Find(deckName));
+                var deck = DeckMapper.Map(db.Decks.SingleOrDefault(d => d.DeckName == deckName));
                 return deck;
             }
         }
@@ -31,6 +32,15 @@ namespace MTG_Helper.DAL.Repositories
         public static void UpdateDeck(DeckDm deck)
         {
             InsertCards(deck.DeckName, deck.Cards);
+        }
+
+        public static void UpdateDeckName(DeckDm deck)
+        {
+            using (var db = new MtgEntities())
+            {
+                var sql = $"Update Deck Set DeckName = '{deck.DeckName}' Where DeckId = {deck.Id}";
+                db.Database.ExecuteSqlCommand(sql);
+            }
         }
 
         public static bool SaveDeckToFile(DeckDm deck)
@@ -57,12 +67,21 @@ namespace MTG_Helper.DAL.Repositories
             return true;
         }
 
+        public static void AddCardToDeck(string deckName, string cardName)
+        {
+            var card = CardRepository.GetCardByName(cardName);
+
+            InsertCard(deckName, card);
+        }
+
         private static void InsertCard(string deckName, CardDm card)
         {
+            var deck = GetDeck(deckName);
+
             var deckCard = new DeckCard
             {
                 DeckCardsId = 0,
-                DeckName = deckName,
+                DeckId = deck.Id,
                 CardId = card.Id
             };
 
@@ -87,6 +106,24 @@ namespace MTG_Helper.DAL.Repositories
             if (!Directory.Exists(deckDirectory)) Directory.CreateDirectory(deckDirectory);
 
             return $"{deckDirectory}/{deckName}.txt";
+        }
+
+        public static void RemoveCardFromDeck(string deckName, string cardName)
+        {
+            var card = CardRepository.GetCardByName(cardName);
+            var deck = GetDeck(deckName);
+
+            DeleteCard(deck, card);
+        }
+
+        private static void DeleteCard(DeckDm deck, CardDm card)
+        {
+            using (var db = new MtgEntities())
+            {
+                var deckCard = db.DeckCards.Single(dc => dc.DeckId == deck.Id && dc.CardId == card.Id);
+                db.DeckCards.Remove(deckCard);
+                db.SaveChanges();
+            }
         }
     }
 }
