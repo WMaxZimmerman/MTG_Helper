@@ -30,7 +30,7 @@ namespace MTG_Helper.BLL.BLLs
             var deck = DeckRepository.GetDeck(deckName);
             if (deck.Commander == null) return false;
 
-            var legalCards = CardRepository.GetAllCardsLegalForGivenCommander(deck.Commander);
+            var legalCards = CardRepository.GetAllCommanderLegalCardInGivenColors(CardBLL.GetCardColors(deck.Commander));
             deck.Cards = legalCards.Where(c => c.SubTypes.Contains(tribeType) || c.RulesText.Contains(tribeType) && c.Id != deck.Commander.Id).ToList();
 
             DeckRepository.UpdateDeck(deck);

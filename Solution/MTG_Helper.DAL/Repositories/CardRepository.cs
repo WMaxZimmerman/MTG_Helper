@@ -77,7 +77,7 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static List<CardDm> GetAllCardsLegalForGivenCommander(CardDm commander)
+        public static List<CardDm> GetAllCommanderLegalCardInGivenColors(IEnumerable<string> desiredColors)
         {
             using (var db = new MtgEntities())
             {
@@ -86,7 +86,7 @@ namespace MTG_Helper.DAL.Repositories
                     var legalCards = db.Cards
                         .Where(c => c.Commander == "legal")
                         .ToList()
-                        .Where(c => IsWithinCommanderColors(c.Colors.Replace(" ", "").Split(',').ToList(), commander.Colors))
+                        .Where(c => IsWithinCommanderColors(c.Colors.Replace(" ", "").Split(',').ToList(), desiredColors))
                         .ToList();
 
                     return CardMapper.Map(legalCards).ToList();
@@ -101,11 +101,24 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        private static bool IsWithinCommanderColors(IEnumerable<string> cardColors, ICollection<string> commanderColors)
+        private static bool IsWithinCommanderColors(IEnumerable<string> cardColors, IEnumerable<string> commanderColors)
         {
-            if (cardColors.Count() == 0) return true;
+            var allColors = GetPossibleColors();
+            var invalidColors = allColors.Where(c => !commanderColors.Contains(c));
 
-            return cardColors.All(commanderColors.Contains);
+            return DoesNotContainInvlaidColor(cardColors, invalidColors);
+        }
+
+        private static bool DoesNotContainInvlaidColor(IEnumerable<string> cardColors, IEnumerable<string> invalidColos)
+        {
+            var isInvalid = false;
+
+            foreach (var color in invalidColos)
+            {
+                if (cardColors.Contains(color)) return true;
+            }
+
+            return isInvalid;
         }
 
         public static List<CardDm> GetLegalCardsForGivenFormat(string format)
@@ -206,6 +219,18 @@ namespace MTG_Helper.DAL.Repositories
                     return new List<CardDm>();
                 }
             }
+        }
+
+        public static IEnumerable<string> GetPossibleColors()
+        {
+            return new List<string>
+            {
+                "black",
+                "green",
+                "blue",
+                "red",
+                "white"
+            };
         }
     }
 }
