@@ -1,11 +1,11 @@
 ﻿using System;
-using MTG_Helper.DAL.DomainModels;
+using MTG_Helper.BLL.ViewModels;
 
 namespace mtg.Views
 {
     public static class Output
     {
-        public static void DrawCard(CardDm card)
+        public static void DrawCard(CardVm card)
         {
             if (card == null) return;
 

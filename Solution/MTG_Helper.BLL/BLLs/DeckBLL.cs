@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using MTG_Helper.BLL.Mappers;
 using MTG_Helper.BLL.ViewModels;
 using MTG_Helper.DAL.DomainModels;
 using MTG_Helper.DAL.Repositories;
@@ -30,7 +31,7 @@ namespace MTG_Helper.BLL.BLLs
             var deck = DeckRepository.GetDeck(deckName);
             if (deck.Commander == null) return false;
 
-            var legalCards = CardRepository.GetAllCommanderLegalCardInGivenColors(CardBLL.GetCardColors(deck.Commander));
+            var legalCards = CardRepository.GetAllCommanderLegalCardInGivenColors(CardBLL.GetCardColors(CardMapper.Map(deck.Commander)));
             deck.Cards = legalCards.Where(c => c.SubTypes.Contains(tribeType) || c.RulesText.Contains(tribeType) && c.Id != deck.Commander.Id).ToList();
 
             DeckRepository.UpdateDeck(deck);
@@ -70,7 +71,12 @@ namespace MTG_Helper.BLL.BLLs
             {
                 DeckName = deck.DeckName,
                 CreatureCount = deck.Cards.Count(c => c.Types.Contains("creature")) + 1,
-                LandCount = deck.Cards.Count(c => c.Types.Contains("land"))
+                LandCount = deck.Cards.Count(c => c.Types.Contains("land")),
+                ArtifactCount = deck.Cards.Count(c => c.Types.Contains("artifact")),
+                SorceryCount = deck.Cards.Count(c => c.Types.Contains("sorcery")),
+                InstantCount = deck.Cards.Count(c => c.Types.Contains("instant")),
+                PlaneswalkerCount = deck.Cards.Count(c => c.Types.Contains("planeswalker")),
+                EnchantmentCount = deck.Cards.Count(c => c.Types.Contains("enchantment"))
             };
 
             return deckStats;
@@ -91,6 +97,11 @@ namespace MTG_Helper.BLL.BLLs
             var deck = DeckRepository.GetDeck(deckName);
             deck.DeckName = newName;
             DeckRepository.UpdateDeckName(deck);
+        }
+
+        public static void DeleteDeck(string deckName)
+        {
+            DeckRepository.Delete(deckName);
         }
     }
 }

@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using MTG_Helper.BLL.Mappers;
+using MTG_Helper.BLL.ViewModels;
 using MTG_Helper.DAL.DomainModels;
+using MTG_Helper.DAL.Repositories;
 
 namespace MTG_Helper.BLL.BLLs
 {
@@ -18,7 +22,7 @@ namespace MTG_Helper.BLL.BLLs
             };
         }
 
-        public static List<string> GetCardColors(CardDm card)
+        public static List<string> GetCardColors(CardVm card)
         {
             var colorList = ExtractColorsFromString(card.Cost);
             colorList.AddRange(ExtractColorsFromString(card.RulesText));
@@ -37,6 +41,26 @@ namespace MTG_Helper.BLL.BLLs
             }
 
             return colorList;
+        }
+
+        public static CardVm GetCardByName(string cardName)
+        {
+            return CardMapper.Map(CardRepository.GetCardByName(cardName));
+        }
+
+        public static IEnumerable<CardVm> GetCommandersByPartialName(string cardName)
+        {
+            return CardMapper.Map(CardRepository.GetCommandersByPartialName(cardName));
+        }
+
+        public static IEnumerable<CardVm> GetAllCards()
+        {
+            return CardMapper.Map(CardRepository.GetAllCards());
+        }
+
+        public static IEnumerable<CardVm> FindTribalCommandersForType(string tribalType)
+        {
+            return CardMapper.Map(CardRepository.FindTribalCommandersForType(tribalType));
         }
     }
 }

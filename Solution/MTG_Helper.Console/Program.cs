@@ -19,10 +19,10 @@ namespace MTG_Helper.Console
             switch (arguments[0].Command)
             {
                 case "-update":
-                    UpdateCommand.Update(args);
+                   // UpdateCommand.Update(args);
                     break;
-                case "-find":
-                    FindCommand.Find(args);
+                case "-card":
+                    CardController.Find(args);
                     break;
                 case "-options":
                     ListOptions();

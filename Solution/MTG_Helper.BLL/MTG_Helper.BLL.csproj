@@ -42,7 +42,12 @@
   <ItemGroup>
     <Compile Include="BLLs\CardBLL.cs" />
     <Compile Include="BLLs\DeckBLL.cs" />
+    <Compile Include="Mappers\CardMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CardLegalityVm.cs" />
+    <Compile Include="ViewModels\CardPriceVm.cs" />
+    <Compile Include="ViewModels\CardSetVm.cs" />
+    <Compile Include="ViewModels\CardVm.cs" />
     <Compile Include="ViewModels\DeckStatsVm.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,5 +56,6 @@
       <Name>MTG_Helper.DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

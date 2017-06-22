@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using mtg.Views;
-using MTG_Helper.DAL.DomainModels;
-using MTG_Helper.DAL.Repositories;
+using MTG_Helper.BLL.BLLs;
+using MTG_Helper.BLL.Mappers;
 
 namespace mtg.Controllers
 {
-    public static class FindCommand
+    public static class CardController
     {
         public static void Find(string[] args)
         {
@@ -68,7 +68,7 @@ namespace mtg.Controllers
             }
 
             var cardName = args[2];
-            var card = CardRepository.GetCardByName(cardName);
+            var card = CardBLL.GetCardByName(cardName);
 
             Output.DrawCard(card);
         }
@@ -82,7 +82,7 @@ namespace mtg.Controllers
             }
 
             var cardName = args[2];
-            var cards = CardRepository.GetCommandersByPartialName(cardName);
+            var cards = CardBLL.GetCommandersByPartialName(cardName);
 
             foreach (var card in cards)
             {
@@ -92,7 +92,7 @@ namespace mtg.Controllers
 
         private static void OutputAllCards()
         {
-            var cards = CardRepository.GetAllCards();
+            var cards = CardBLL.GetAllCards();
 
             foreach (var card in cards)
             {
@@ -120,7 +120,7 @@ namespace mtg.Controllers
 
                 var tribalType = args[3];
 
-                var cards = CardRepository.FindTribalCommandersForType(tribalType);
+                var cards = CardBLL.FindTribalCommandersForType(tribalType);
 
                 foreach (var card in cards)
                 {

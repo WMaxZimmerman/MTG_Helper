@@ -125,5 +125,19 @@ namespace MTG_Helper.DAL.Repositories
                 db.SaveChanges();
             }
         }
+
+        public static void Delete(string deckName)
+        {
+            using (var db = new MtgEntities())
+            {
+                var deck = db.Decks.Single(dc => dc.DeckName == deckName);
+
+                var sql = $"Delete DeckCards Where DeckId = {deck.DeckId}";
+                db.Database.ExecuteSqlCommand(sql);
+
+                db.Decks.Remove(deck);
+                db.SaveChanges();
+            }
+        }
     }
 }

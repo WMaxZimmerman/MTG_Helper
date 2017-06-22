@@ -41,6 +41,11 @@ namespace mtg.Controllers
                     Console.WriteLine($"Deck: {stats.DeckName}");
                     Console.WriteLine($"Creature Count: {stats.CreatureCount}");
                     Console.WriteLine($"Land Count: {stats.LandCount}");
+                    Console.WriteLine($"Instant Count: {stats.InstantCount}");
+                    Console.WriteLine($"Sorcery Count: {stats.SorceryCount}");
+                    Console.WriteLine($"Planswalker Count: {stats.PlaneswalkerCount}");
+                    Console.WriteLine($"Artifact Count: {stats.ArtifactCount}");
+                    Console.WriteLine($"Enchantment Count: {stats.EnchantmentCount}");
                     break;
                 case "-add":
                     DeckBLL.AddCardToDeck(args[0].Value, args[1].Value);
@@ -53,6 +58,10 @@ namespace mtg.Controllers
                 case "-rename":
                     DeckBLL.RenameDeck(args[0].Value, args[1].Value);
                     Console.WriteLine($"Successfully Renamed the deck '{args[0].Value}' to '{args[1].Value}'.");
+                    break;
+                case "-delete":
+                    DeckBLL.DeleteDeck(args[0].Value);
+                    Console.WriteLine($"Successfully Deleted the deck '{args[0].Value}' .");
                     break;
                 default:
                     Console.WriteLine("Invalid Option press enter to try again");
