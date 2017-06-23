@@ -1,39 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using mtg.Models;
 using mtg.Views;
 using MTG_Helper.BLL.BLLs;
-using MTG_Helper.BLL.Mappers;
 
 namespace mtg.Controllers
 {
     public static class CardController
     {
-        public static void Find(string[] args)
+        public static void Find(List<CommandLineArguments> args)
         {
-            if (args.Length < 2)
+            if (args.Count < 2)
             {
-                Console.WriteLine("You need to tell me what to find.");
-                return;
+                var value = args[0].Value;
+
+            }
+            else
+            {
+                
             }
 
             var updateArg = args[1];
 
-            switch (updateArg)
+            switch (updateArg.Command)
             {
-                case "all":
-                    OutputAllCards();
+                case "-update":
+                    CardBLL.UdpateCardsFromApi();
                     break;
-                case "card":
-                    FindCard(args);
-                    break;
-                case "cards":
-                    FindCards(args);
-                    break;
-                case "options":
+                case "-help":
                     ListOptions();
-                    break;
-                case "commander":
-                    FindCommander(args);
                     break;
                 default:
                     Console.WriteLine($"I don't Know how to find {updateArg}. Use 'options' to see available arguments.");
@@ -53,9 +48,7 @@ namespace mtg.Controllers
         {
             return new List<string>
             {
-                "all",
-                "card",
-                "cards"
+                "-update"
             };
         }
 

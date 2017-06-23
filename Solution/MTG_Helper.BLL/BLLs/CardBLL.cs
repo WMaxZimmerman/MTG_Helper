@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using MTG_Helper.BLL.Mappers;
 using MTG_Helper.BLL.ViewModels;
+using MTG_Helper.DAL.DALs;
 using MTG_Helper.DAL.DomainModels;
 using MTG_Helper.DAL.Repositories;
 
@@ -41,6 +42,14 @@ namespace MTG_Helper.BLL.BLLs
             }
 
             return colorList;
+        }
+        
+        public static void UdpateCardsFromApi()
+        {
+            System.Console.WriteLine("Starting Cards:");
+            var cards = MtgApi.GetCardsByPageRange(0, 400);
+
+            CardRepository.InsertCards(cards);
         }
 
         public static CardVm GetCardByName(string cardName)

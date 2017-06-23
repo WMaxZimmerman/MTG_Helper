@@ -22,7 +22,7 @@ namespace MTG_Helper.Console
                    // UpdateCommand.Update(args);
                     break;
                 case "-card":
-                    CardController.Find(args);
+                    CardController.Find(arguments);
                     break;
                 case "-options":
                     ListOptions();

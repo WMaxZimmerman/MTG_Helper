@@ -1,8 +1,16 @@
-mtg -deck -create "Scarecrow Test" -commander "Reaper King"
-mtg -deck -build "Scarecrow Test" -t "scarecrow"
-mtg -deck "Scarecrow Test" -stats
-mtg -deck "Scarecrow Test" -add "Sol Ring"
-mtg -deck "Scarecrow Test" -remove "Sol Ring"
-mtg -deck "Scarecrow Test" -output "c:/tools/MtgHelper/decks/Scarecrow_Test.txt" (-tappedOut/-store)
-mtg -deck "Scarecrow Test" -delete
-mtg -deck "Scarecrow Test" -rename "Scarecrow Renamed"
+DECK COMMANDS:
+mtg -decks "Scarecrow Test" -create "Reaper King"
+mtg -decks "Scarecrow Test" -build "scarecrow"
+mtg -decks "Scarecrow Test" -stats
+mtg -decks "Scarecrow Test" -add "Sol Ring"
+mtg -decks "Scarecrow Test" -remove "Sol Ring"
+mtg -decks "Scarecrow Test" -output "c:/tools/MtgHelper/decks/Scarecrow_Test.txt" (-tappedOut/-store)
+mtg -decks "Scarecrow Test" -delete
+mtg -decks "Scarecrow Test" -rename "Scarecrow Renamed"
+
+CARD COMMANDS:
+mtg -cards "Sol Ring"
+mtg -cards -update
+
+SET COMMANDS:
+mtg -sets -update
