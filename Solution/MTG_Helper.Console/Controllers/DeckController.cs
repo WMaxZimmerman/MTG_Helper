@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using mtg.Models;
+using mtg.Views;
 using MTG_Helper.BLL.BLLs;
 
 namespace mtg.Controllers
@@ -63,10 +64,29 @@ namespace mtg.Controllers
                     DeckBLL.DeleteDeck(args[0].Value);
                     Console.WriteLine($"Successfully Deleted the deck '{args[0].Value}' .");
                     break;
+                case "-help":
+                    Output.ListOptions(Options());
+                    break;
                 default:
-                    Console.WriteLine("Invalid Option press enter to try again");
+                    Console.WriteLine("Invalid command. For a list of possible commands use '-help'.");
                     break;
             }
+        }
+
+        private static IEnumerable<string> Options()
+        {
+            return new List<string>
+            {
+                "-create",
+                "-build",
+                "-output",
+                "-stats",
+                "-add",
+                "-remove",
+                "-rename",
+                "-delete",
+                "-help"
+            };
         }
     }
 }

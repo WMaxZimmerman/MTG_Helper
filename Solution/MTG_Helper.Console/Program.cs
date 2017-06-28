@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using mtg.Controllers;
 using mtg.Models;
-using MTG_Helper.BLL.BLLs;
+using mtg.Views;
 
 namespace MTG_Helper.Console
 {
@@ -11,27 +11,27 @@ namespace MTG_Helper.Console
         {
             if (args.Length == 0)
             {
-                System.Console.WriteLine("Please enter an argument.  Use 'options' to see available arguments.");
+                System.Console.WriteLine("Please enter an argument.  Use 'help' to see available arguments.");
                 return;
             }
             var arguments = SetArguments(args);
 
             switch (arguments[0].Command)
             {
-                case "-update":
+                case "-sets":
                    // UpdateCommand.Update(args);
                     break;
-                case "-card":
+                case "-cards":
                     CardController.Find(arguments);
                     break;
-                case "-options":
-                    ListOptions();
+                case "-help":
+                    Output.ListOptions(Options());
                     break;
-                case "-deck":
+                case "-decks":
                     DeckController.PerformDeckCommand(arguments);
                     break;
                 default:
-                    System.Console.WriteLine("Invalid Option press enter to try again");
+                    System.Console.WriteLine("Invalid command. For a list of possible commands use '-help'.");
                     break;
             }
         }
@@ -41,45 +41,35 @@ namespace MTG_Helper.Console
             var arguments = new List<CommandLineArguments>();
             CommandLineArguments tempArg = null;
 
-            for (var i = 0; i < args.Length; i++)
+            foreach (var argument in args)
             {
-                if (args[i].StartsWith("-"))
+                if (argument.StartsWith("-"))
                 {
                     if (tempArg != null) arguments.Add(tempArg);
                     tempArg = new CommandLineArguments
                     {
-                        Command = args[i],
+                        Command = argument,
                         Order = arguments.Count + 1
                     };
                 }
                 else
                 {
-                    tempArg.Value = args[i];
+                    tempArg.Value = argument;
                 }
             }
             arguments.Add(tempArg);
 
             return arguments;
         }
-
-        private static void ListOptions()
-        {
-            foreach (var option in Options())
-            {
-                System.Console.WriteLine($"-{option}");
-            }
-        }
         
         private static IEnumerable<string> Options()
         {
             return new List<string>
             {
-                "update",
-                "update sets",
-                "update cards",
-                "build",
-                "find",
-                "options"
+                "-decks",
+                "-cads",
+                "-sets",
+                "-help"
             };
         }
     }
