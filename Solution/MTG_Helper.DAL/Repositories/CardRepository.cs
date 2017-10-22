@@ -59,20 +59,13 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static List<CardDm> GetAllCards()
+        public static IEnumerable<CardDm> GetAllCards()
         {
             using (var db = new MtgEntities())
             {
-                try
+                foreach (var dbCard in db.Cards)
                 {
-                    return CardMapper.Map(db.Cards).ToList();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine($"Unable to retreive all cards.");
-                    Console.WriteLine(e);
-                    return new List<CardDm>();
+                    yield return CardMapper.Map(dbCard);
                 }
             }
         }

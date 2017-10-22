@@ -13,8 +13,13 @@ namespace mtg.Controllers
             if (args.Count < 2)
             {
                 var value = args[0].Value;
-                var card = CardBLL.GetCardByName(value);
-                Output.DrawCard(card);
+//                var card = CardBLL.GetCardByName(value);
+//                Output.DrawCard(card);
+                var cards = CardBLL.GetAllCards();
+                foreach (var card in cards)
+                {
+                    Output.DrawCard(card);
+                }
             }
             else
             {
