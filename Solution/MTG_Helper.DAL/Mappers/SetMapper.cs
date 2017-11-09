@@ -21,9 +21,28 @@ namespace MTG_Helper.DAL.Mappers
             return em;
         }
 
-        public static List<Set> Map(List<SetApiDm> dmList)
+        public static IEnumerable<Set> Map(IEnumerable<SetApiDm> dmList)
         {
             return dmList.Select(Map).ToList();
+        }
+
+        public static SetApiDm Map(Set em)
+        {
+            var dm = new SetApiDm
+            {
+                Url = em.Url,
+                Id = em.SetId,
+                Border = em.Border,
+                Type = em.SetType,
+                Name = em.SetName
+            };
+
+            return dm;
+        }
+
+        public static IEnumerable<SetApiDm> Map(IEnumerable<Set> emList)
+        {
+            return emList.Select(Map).ToList();
         }
     }
 }

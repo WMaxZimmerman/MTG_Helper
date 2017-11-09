@@ -32,8 +32,9 @@ namespace MTG_Helper.Tests.DAL
         {
             const string format = "staNdard";
             var cards = CardRepository.GetLegalCardsForGivenFormat(format);
+            var cardCount = cards.Count();
 
-            Assert.IsTrue(cards.Count == 1249);
+            Assert.IsTrue(cardCount == 1902);
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace MTG_Helper.Tests.DAL
             const string format = "badFormat";
             var cards = CardRepository.GetLegalCardsForGivenFormat(format);
 
-            Assert.IsTrue(cards.Count == 0);
+            Assert.IsTrue(!cards.Any());
         }
 
         [Test]
@@ -50,8 +51,9 @@ namespace MTG_Helper.Tests.DAL
         {
             const string subtype = "snake";
             var cards = CardRepository.GetAllCardsByGivenSubtype(subtype);
+            var cardCount = cards.Count();
 
-            Assert.IsTrue(cards.Count() == 75);
+            Assert.IsTrue(cardCount == 76);
         }
     }
 }

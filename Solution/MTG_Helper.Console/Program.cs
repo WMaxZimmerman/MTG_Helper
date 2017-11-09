@@ -30,6 +30,9 @@ namespace MTG_Helper.Console
                 case "-decks":
                     DeckController.PerformDeckCommand(arguments);
                     break;
+                case "-database":
+                    DatabaseController.Update(arguments);
+                    break;
                 default:
                     System.Console.WriteLine("Invalid command. For a list of possible commands use '-help'.");
                     break;

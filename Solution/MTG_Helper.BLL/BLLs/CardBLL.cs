@@ -43,14 +43,6 @@ namespace MTG_Helper.BLL.BLLs
 
             return colorList;
         }
-        
-        public static void UdpateCardsFromApi()
-        {
-            System.Console.WriteLine("Starting Cards:");
-            var cards = MtgApi.GetCardsByPageRange(0, 400);
-
-            CardRepository.InsertCards(cards);
-        }
 
         public static CardVm GetCardByName(string cardName)
         {

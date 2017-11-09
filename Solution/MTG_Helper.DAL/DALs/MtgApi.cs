@@ -32,6 +32,23 @@ namespace MTG_Helper.DAL.DALs
             }
         }
 
+        public static IEnumerable<CardApiDm> GetCardsByPageAndSet(string set, int pageNumber)
+        {
+            var client = new HttpClient { BaseAddress = new Uri($"{Url}/cards") };
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            var response = client.GetAsync($"?set={set}&page={pageNumber}").Result;  // Blocking call!
+            if (!response.IsSuccessStatusCode) return new List<CardApiDm>();
+            
+            // Parse the response body. Blocking!
+            var dataObjects = response.Content.ReadAsAsync<IEnumerable<CardApiDm>>().Result;
+            return dataObjects;
+        }
+
         public static List<CardApiDm> GetCardsByPageRange(int startPage, int endPage)
         {
             var cards = new List<CardApiDm>();
@@ -57,8 +74,22 @@ namespace MTG_Helper.DAL.DALs
             return cards;
         }
 
+        public static List<CardApiDm> GetAllCardsForSet(string set)
+        {
+            var cards = new List<CardApiDm>();
+
+            for (var i = 0; i < 40; i++)
+            {
+                cards.AddRange(GetCardsByPageAndSet(set, i));
+            }
+
+            return cards;
+        }
+
+
         public static List<SetApiDm> GetAllSets()
         {
+            Console.WriteLine("Retreiving Set List...");
             var client = new HttpClient {BaseAddress = new Uri($"{Url}/sets")};
 
             // Add an Accept header for JSON format.

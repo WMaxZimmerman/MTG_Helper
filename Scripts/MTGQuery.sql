@@ -1,4 +1,6 @@
 --/*
+Drop Table [dbo].[DeckCards]
+Drop Table [dbo].[Deck]
 Drop Table [dbo].[CardSets]
 Drop Table [dbo].[CardColors]
 Drop Table [dbo].[CardSubTypes]
@@ -8,8 +10,6 @@ Drop Table [dbo].[Sets]
 Drop Table [dbo].[Colors]
 Drop Table [dbo].[SubTypes]
 Drop Table [dbo].[Types]
-Drop Table [dbo].[DeckCards]
-Drop Table [dbo].[Deck]
 --*/
 
 CREATE TABLE [dbo].[Types] (

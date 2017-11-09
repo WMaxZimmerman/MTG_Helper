@@ -38,5 +38,16 @@ namespace MTG_Helper.DAL.Repositories
                 count++;
             }
         }
+
+        public static IEnumerable<SetApiDm> GetAllSets()
+        {
+            using (var db = new MtgEntities())
+            {
+                foreach (var dbSet in db.Sets)
+                {
+                    yield return SetMapper.Map(dbSet);
+                }
+            }
+        }
     }
 }

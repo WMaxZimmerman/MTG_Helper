@@ -27,8 +27,12 @@ namespace mtg.Controllers
 
                 switch (updateArg.Command)
                 {
-                    case "-update":
-                        CardBLL.UdpateCardsFromApi();
+                    case "-tribalCommander":
+                        var cards = CardBLL.FindTribalCommandersForType(updateArg.Value);
+                        foreach (var card in cards)
+                        {
+                            Output.DrawCard(card);
+                        }
                         break;
                     case "-help":
                         Output.ListOptions(Options());
@@ -40,11 +44,18 @@ namespace mtg.Controllers
             }
         }
 
+        [Command("tribalCommander", "")]
+        public static void OutputPossibleCommandersForTribe(string tribe)
+        {
+            
+        }
+
         private static IEnumerable<string> Options()
         {
             return new List<string>
             {
                 "-update",
+                "-tribalCommander",
                 "-help"
             };
         }
