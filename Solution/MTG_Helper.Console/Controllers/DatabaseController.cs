@@ -1,38 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using mtg.Models;
-using mtg.Views;
+﻿using mtg.Models;
 using MTG_Helper.BLL.BLLs;
 
 namespace mtg.Controllers
 {
+    [CliController("database", "A set of commands to interact with the database.")]
     public static class DatabaseController
     {
-        public static void Update(List<CommandLineArguments> args)
+        [CliCommand("update", "A command to update the database to include any missing sets/cards.")]
+        public static void Update()
         {
-            var updateArg = args[1];
-
-            switch (updateArg.Command)
-            {
-                case "-update":
-                    ApiBLL.UpdateDatabase();
-                    break;
-                case "-help":
-                    Output.ListOptions(Options());
-                    break;
-                default:
-                    Console.WriteLine($"Invalid parameters");
-                    break;
-            }
-        }
-
-        private static IEnumerable<string> Options()
-        {
-            return new List<string>
-            {
-                "-update",
-                "-help"
-            };
+            ApiBLL.UpdateDatabase();
         }
     }
 }

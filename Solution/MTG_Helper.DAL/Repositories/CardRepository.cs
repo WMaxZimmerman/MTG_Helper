@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MTG_Helper.DAL.DB;
@@ -19,7 +18,7 @@ namespace MTG_Helper.DAL.Repositories
                 {
                     return CardMapper.Map(db.Cards.Single(c => c.CardName == cardName));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Unable to find the card {cardName}.");
@@ -132,6 +131,23 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
+        public static IEnumerable<CardDm> QueryCards(string tribal, string name, bool? commader)
+        {
+            using (var db = new MtgEntities())
+            {
+                var cards =  db.Cards.Where(c => 
+                    (tribal == null || c.SubTypes.ToLower().Contains(tribal) || c.RulesText.ToLower().Contains(tribal)) &&
+                    (commader == null || c.Types.Contains("Legendary")) &&
+                    (name == null || c.CardName.ToLower() == name.ToLower())
+                );
+                
+                foreach (var card in cards)
+                {
+                    yield return CardMapper.Map(card);
+                }
+            }
+        }
+        
         public static IEnumerable<string> GetPossibleColors()
         {
             return new List<string>
@@ -199,14 +215,7 @@ namespace MTG_Helper.DAL.Repositories
 
         private static bool DoesNotContainInvlaidColor(IEnumerable<string> cardColors, IEnumerable<string> invalidColos)
         {
-            var isInvalid = false;
-
-            foreach (var color in invalidColos)
-            {
-                if (cardColors.Contains(color)) return true;
-            }
-
-            return isInvalid;
+            return invalidColos.Any(cardColors.Contains);
         }
 
     }

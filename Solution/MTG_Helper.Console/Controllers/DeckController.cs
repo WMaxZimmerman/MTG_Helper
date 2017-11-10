@@ -1,92 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
 using mtg.Models;
-using mtg.Views;
 using MTG_Helper.BLL.BLLs;
 
 namespace mtg.Controllers
 {
+    [CliController("decks", "A set of commands to interact with and create magic decks.")]
     public static class DeckController
     {
-        public static void PerformDeckCommand(List<CommandLineArguments> args)
+        [CliCommand("create", "Creates a new deck with the given name and commander.")]
+        public static void Create(string deckName, string commanderName)
         {
-            string message;
-            bool success;
-
-            switch (args[1].Command)
-            {
-                case "-create":
-                    success = DeckBLL.CreateDeck(args[1].Value, args[2].Value);
-                    message = success
-                        ? "Deck Created Successfully."
-                        : "An Error Occured While Attempting To Create Deck.";
-                    Console.WriteLine(message);
-                    break;
-                case "-build":
-                    success = DeckBLL.BuildCommanderDeck(args[1].Value, args[2].Value);
-                    message = success
-                        ? "Deck Built Successfully."
-                        : "An Error Occured While Attempting To Build Deck.";
-                    Console.WriteLine(message);
-                    break;
-                case "-output":
-                    success = DeckBLL.OutputDeckToFile(args[0].Value, args[1].Value);
-                    message = success
-                        ? $"Deck Was Successfully Output To File '{args[1].Value}'."
-                        : "An Error Occured While Attempting To Build Deck.";
-                    Console.WriteLine(message);
-                    break;
-                case "-stats":
-                    var stats = DeckBLL.GetDeckStats(args[0].Value);
-                    Console.WriteLine();
-                    Console.WriteLine($"Deck: {stats.DeckName}");
-                    Console.WriteLine($"Creature Count: {stats.CreatureCount}");
-                    Console.WriteLine($"Land Count: {stats.LandCount}");
-                    Console.WriteLine($"Instant Count: {stats.InstantCount}");
-                    Console.WriteLine($"Sorcery Count: {stats.SorceryCount}");
-                    Console.WriteLine($"Planswalker Count: {stats.PlaneswalkerCount}");
-                    Console.WriteLine($"Artifact Count: {stats.ArtifactCount}");
-                    Console.WriteLine($"Enchantment Count: {stats.EnchantmentCount}");
-                    break;
-                case "-add":
-                    DeckBLL.AddCardToDeck(args[0].Value, args[1].Value);
-                    Console.WriteLine($"Successfully Added the card '{args[1].Value}' the deck '{args[0].Value}'.");
-                    break;
-                case "-remove":
-                    DeckBLL.RemoveCardFromDeck(args[0].Value, args[1].Value);
-                    Console.WriteLine($"Successfully Removed the card '{args[1].Value}' the deck '{args[0].Value}'.");
-                    break;
-                case "-rename":
-                    DeckBLL.RenameDeck(args[0].Value, args[1].Value);
-                    Console.WriteLine($"Successfully Renamed the deck '{args[0].Value}' to '{args[1].Value}'.");
-                    break;
-                case "-delete":
-                    DeckBLL.DeleteDeck(args[0].Value);
-                    Console.WriteLine($"Successfully Deleted the deck '{args[0].Value}' .");
-                    break;
-                case "-help":
-                    Output.ListOptions(Options());
-                    break;
-                default:
-                    Console.WriteLine("Invalid command. For a list of possible commands use '-help'.");
-                    break;
-            }
+            var success = DeckBLL.CreateDeck(deckName, commanderName);
+            var message = success
+                ? "Deck Created Successfully."
+                : "An Error Occured While Attempting To Create Deck.";
+            Console.WriteLine(message);
         }
 
-        private static IEnumerable<string> Options()
+        [CliCommand("build", "Populates an existing deck with cards for the given tribe.")]
+        public static void Build(string deckName, string tribe)
         {
-            return new List<string>
-            {
-                "-create",
-                "-build",
-                "-output",
-                "-stats",
-                "-add",
-                "-remove",
-                "-rename",
-                "-delete",
-                "-help"
-            };
+            var success = DeckBLL.BuildCommanderDeck(deckName, tribe);
+            var message = success
+                ? "Deck Built Successfully."
+                : "An Error Occured While Attempting To Build Deck.";
+            Console.WriteLine(message);
+        }
+
+        [CliCommand("output", "Outputs the cards in the given deck to the specified file.")]
+        public static void Output(string deckName, string fileName)
+        {
+            var success = DeckBLL.OutputDeckToFile(deckName, fileName);
+            var message = success
+                ? $"Deck Was Successfully Output To File '{fileName}'."
+                : "An Error Occured While Attempting To Build Deck.";
+            Console.WriteLine(message);
+        }
+
+        [CliCommand("stats", "Outputs the stats of the given deck to the console.")]
+        public static void Stats(string deckName)
+        {
+            var stats = DeckBLL.GetDeckStats(deckName);
+            Console.WriteLine();
+            Console.WriteLine($"Deck: {stats.DeckName}");
+            Console.WriteLine($"Creature Count: {stats.CreatureCount}");
+            Console.WriteLine($"Land Count: {stats.LandCount}");
+            Console.WriteLine($"Instant Count: {stats.InstantCount}");
+            Console.WriteLine($"Sorcery Count: {stats.SorceryCount}");
+            Console.WriteLine($"Planswalker Count: {stats.PlaneswalkerCount}");
+            Console.WriteLine($"Artifact Count: {stats.ArtifactCount}");
+            Console.WriteLine($"Enchantment Count: {stats.EnchantmentCount}");
+        }
+
+        [CliCommand("add", "Adds the given card to the specified deck.")]
+        public static void Add(string deckName, string cardName)
+        {
+            DeckBLL.AddCardToDeck(deckName, cardName);
+            Console.WriteLine($"Successfully Added the card '{cardName}' the deck '{deckName}'.");
+        }
+
+        [CliCommand("remove", "Removes the given card from the specified deck.")]
+        public static void Remove(string deckName, string cardName)
+        {
+            DeckBLL.RemoveCardFromDeck(deckName, cardName);
+            Console.WriteLine($"Successfully Removed the card '{cardName}' the deck '{deckName}'.");
+        }
+
+        [CliCommand("rename", "Renames the given deck to the specified name.")]
+        public static void Rename(string deckName, string newName)
+        {
+            DeckBLL.RenameDeck(deckName, newName);
+            Console.WriteLine($"Successfully Renamed the deck '{deckName}' to '{newName}'.");
+        }
+
+        [CliCommand("delete", "Deletes the specified deck from the database.")]
+        public static void Delete(string deckName)
+        {
+            DeckBLL.DeleteDeck(deckName);
+            Console.WriteLine($"Successfully Deleted the deck '{deckName}' .");
         }
     }
 }

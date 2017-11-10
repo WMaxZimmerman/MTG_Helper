@@ -1,63 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using mtg.Models;
+﻿using mtg.Models;
 using mtg.Views;
 using MTG_Helper.BLL.BLLs;
 
 namespace mtg.Controllers
 {
+    [CliController("cards", "A set of commands to interact with or retrieve cards.")]
     public static class CardController
     {
-        public static void Find(List<CommandLineArguments> args)
+        [CliCommand("find", "A command to search for cards.")]
+        public static void FindCards(string tribal = null, string name = null, bool? commander = null)
         {
-            if (args.Count < 2)
+            var cards = CardBLL.SearchCards(tribal, name, commander);
+
+            foreach (var card in cards)
             {
-                var value = args[0].Value;
-//                var card = CardBLL.GetCardByName(value);
-//                Output.DrawCard(card);
-                var cards = CardBLL.GetAllCards();
-                foreach (var card in cards)
-                {
-                    Output.DrawCard(card);
-                }
+                Output.DrawCard(card);
             }
-            else
-            {
-                var updateArg = args[1];
-
-                switch (updateArg.Command)
-                {
-                    case "-tribalCommander":
-                        var cards = CardBLL.FindTribalCommandersForType(updateArg.Value);
-                        foreach (var card in cards)
-                        {
-                            Output.DrawCard(card);
-                        }
-                        break;
-                    case "-help":
-                        Output.ListOptions(Options());
-                        break;
-                    default:
-                        Console.WriteLine($"Invali");
-                        break;
-                }
-            }
-        }
-
-        [Command("tribalCommander", "")]
-        public static void OutputPossibleCommandersForTribe(string tribe)
-        {
-            
-        }
-
-        private static IEnumerable<string> Options()
-        {
-            return new List<string>
-            {
-                "-update",
-                "-tribalCommander",
-                "-help"
-            };
         }
     }
 }

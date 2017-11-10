@@ -60,7 +60,8 @@
     <Compile Include="Controllers\DeckController.cs" />
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\UpdateCommand.cs" />
-    <Compile Include="Models\CommandAttribute.cs" />
+    <Compile Include="Models\CliController.cs" />
+    <Compile Include="Models\CliCommand.cs" />
     <Compile Include="Models\CommandLineArguments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

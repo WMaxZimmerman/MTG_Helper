@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using MTG_Helper.BLL.Mappers;
 using MTG_Helper.BLL.ViewModels;
@@ -44,6 +45,11 @@ namespace MTG_Helper.BLL.BLLs
             return colorList;
         }
 
+        public static IEnumerable<CardVm> SearchCards(string tribal, string name, bool? commader)
+        {
+            return CardMapper.Map(CardRepository.QueryCards(tribal, name, commader));
+        }
+
         public static CardVm GetCardByName(string cardName)
         {
             return CardMapper.Map(CardRepository.GetCardByName(cardName));
@@ -57,6 +63,16 @@ namespace MTG_Helper.BLL.BLLs
         public static IEnumerable<CardVm> GetAllCards()
         {
             return CardMapper.Map(CardRepository.GetAllCards());
+        }
+
+        public static IEnumerable<CardVm> FilterCardsToGivenTribe(IEnumerable<CardVm> cards, string tribe)
+        {
+            return cards.Where(c => c.SubTypes.Select(t => t.ToLower()).Contains(tribe) || c.RulesText.ToLower().Contains(tribe));
+        }
+
+        public static IEnumerable<CardVm> FilterCardsToOnlyLegendaries(IEnumerable<CardVm> cards)
+        {
+            return cards.Where(c => c.Types.Select(t => t.ToLower()).Contains("legendary"));
         }
 
         public static IEnumerable<CardVm> FindTribalCommandersForType(string tribalType)
