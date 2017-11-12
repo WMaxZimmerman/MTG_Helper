@@ -1,0 +1,6 @@
+34 creatures
+36 land
+10 artifacts
+08 instants
+08 sorceries
+03 enchantments

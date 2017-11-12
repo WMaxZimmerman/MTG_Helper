@@ -96,3 +96,4 @@ C:\git\MTG_Helper\Solution\MTG_Helper.WebApi\bin\System.Web.Http.WebHost.xml
 C:\git\MTG_Helper\Solution\MTG_Helper.WebApi\obj\Debug\MTG_Helper.WebApi.csprojResolveAssemblyReference.cache
 C:\git\MTG_Helper\Solution\MTG_Helper.WebApi\obj\Debug\MTG_Helper.WebApi.dll
 C:\git\MTG_Helper\Solution\MTG_Helper.WebApi\obj\Debug\MTG_Helper.WebApi.pdb
+C:\git\MTG_Helper\Solution\MTG_Helper.WebApi\obj\Debug\MTG_Helper.WebApi.csproj.CoreCompileInputs.cache

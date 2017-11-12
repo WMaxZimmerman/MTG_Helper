@@ -16,6 +16,7 @@ namespace MTG_Helper.BLL.Mappers
 
         public static CardVm Map(CardDm dm)
         {
+            System.Console.WriteLine("Mapping commander");
             var vm = new CardVm
             {
                 Id = dm.Id,

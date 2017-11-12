@@ -38,19 +38,22 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static IEnumerable<CardDm> GetAllCommanderLegalCardInGivenColors(IEnumerable<string> desiredColors)
+        public static IEnumerable<CardDm> GetAllCommanderLegalCardInGivenColors(List<string> desiredColors)
         {
+            Console.WriteLine("Attempting to pull from DBs");
             using (var db = new MtgEntities())
             {
+                var invalidColors = GetInvalidColors(desiredColors);
                 var legalCards = db.Cards
                     .Where(c => c.Commander == "legal")
-                    .Where(c => IsWithinCommanderColors(c.Colors.Replace(" ", "").Split(',').ToList(), desiredColors));
+                    .Where(c => invalidColors.All(i => !c.Cost.Contains(i) && !c.RulesText.Contains(i)));
 
                 foreach (var card in legalCards)
                 {
                     yield return CardMapper.Map(card);
                 }
             }
+            Console.WriteLine("finished db");
         }
 
         public static IEnumerable<CardDm> GetLegalCardsForGivenFormat(string format)
@@ -131,14 +134,24 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static IEnumerable<CardDm> QueryCards(string tribal, string name, bool? commader)
+        public static IEnumerable<CardDm> QueryCards(string tribal, string name, bool? commader, List<string> colors, string type)
         {
+            Console.WriteLine("db stuff");
             using (var db = new MtgEntities())
             {
+                var invalidColors = GetInvalidColors(colors);
+                Console.WriteLine("passed Colorss");
+                foreach (var invalidColor in invalidColors)
+                {
+                    Console.WriteLine(invalidColor);
+                }
+
                 var cards =  db.Cards.Where(c => 
                     (tribal == null || c.SubTypes.ToLower().Contains(tribal) || c.RulesText.ToLower().Contains(tribal)) &&
                     (commader == null || c.Types.Contains("Legendary")) &&
-                    (name == null || c.CardName.ToLower() == name.ToLower())
+                    (name == null || c.CardName.ToLower() == name.ToLower()) &&
+                    //(colors == null || invalidColors.All(i => !c.Cost.Contains(i) && !c.RulesText.Contains(i))) &&
+                    (type == null || c.Types.Contains(type))
                 );
                 
                 foreach (var card in cards)
@@ -148,16 +161,17 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
         
-        public static IEnumerable<string> GetPossibleColors()
+        public static List<string> GetPossibleColors()
         {
             return new List<string>
             {
-                "black",
-                "green",
-                "blue",
-                "red",
-                "white"
+                "{W}","{U}","{B}","{R}","{G}"
             };
+        }
+
+        public static List<string> GetInvalidColors(List<string> colors)
+        {
+            return colors == null ? new List<string>() : GetPossibleColors().Where(c => colors.All(a => a != c)).ToList();
         }
 
         public static void InsertCard(CardApiDm cardApi, string setId)

@@ -79,5 +79,18 @@ namespace mtg.Controllers
             DeckBLL.DeleteDeck(deckName);
             Console.WriteLine($"Successfully Deleted the deck '{deckName}' .");
         }
+
+        [CliCommand("findLands", "Deletes the specified deck from the database.")]
+        public static void FindLands(string deckName)
+        {
+            var cards = DeckBLL.GetDeckLands(deckName);
+
+            Console.WriteLine("Outputting Cardss");
+
+            foreach (var card in cards)
+            {
+                Views.Output.DrawCard(card);
+            }
+        }
     }
 }

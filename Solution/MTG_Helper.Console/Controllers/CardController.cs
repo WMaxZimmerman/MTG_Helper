@@ -1,4 +1,5 @@
-﻿using mtg.Models;
+﻿using System.Collections.Generic;
+using mtg.Models;
 using mtg.Views;
 using MTG_Helper.BLL.BLLs;
 
@@ -8,9 +9,9 @@ namespace mtg.Controllers
     public static class CardController
     {
         [CliCommand("find", "A command to search for cards.")]
-        public static void FindCards(string tribal = null, string name = null, bool? commander = null)
+        public static void FindCards(string tribal = null, string name = null, bool? commander = null, string colors = null, string type = null)
         {
-            var cards = CardBLL.SearchCards(tribal, name, commander);
+            var cards = CardBLL.SearchCards(tribal, name, commander, colors, type);
 
             foreach (var card in cards)
             {

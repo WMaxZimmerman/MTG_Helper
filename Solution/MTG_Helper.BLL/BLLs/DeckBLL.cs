@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using MTG_Helper.BLL.Mappers;
 using MTG_Helper.BLL.ViewModels;
@@ -32,11 +34,32 @@ namespace MTG_Helper.BLL.BLLs
             if (deck.Commander == null) return false;
 
             var legalCards = CardRepository.GetAllCommanderLegalCardInGivenColors(CardBLL.GetCardColors(CardMapper.Map(deck.Commander)));
-            deck.Cards = legalCards.Where(c => c.SubTypes.Contains(tribeType) || c.RulesText.Contains(tribeType) && c.Id != deck.Commander.Id).ToList();
+            var tempCards = legalCards.Where(c => c.SubTypes.Contains(tribeType) || c.RulesText.Contains(tribeType) && c.Id != deck.Commander.Id);
+
+            if (tempCards.Count() > 34)
+            {
+                tempCards = tempCards.ToList().GetRange(0, 34);
+            }
+
+            
+
 
             DeckRepository.UpdateDeck(deck);
 
             return true;
+        }
+
+        public static IEnumerable<CardVm> GetDeckLands(string deckName)
+        {
+            Console.WriteLine("Getting Deck");
+            var deck = DeckRepository.GetDeck(deckName);
+
+            Console.WriteLine("Looking for legal cards");
+            var legalCards = CardRepository.GetAllCommanderLegalCardInGivenColors(CardBLL.GetCardColors(CardMapper.Map(deck.Commander)));
+
+            Console.WriteLine($"Attempting to find lands in {legalCards.Count()} cards.");
+
+            return CardMapper.Map(legalCards.Where(c => c.Types.Contains("land")));
         }
         
         public static bool OutputDeckToFile(string deckName, string path)

@@ -26,8 +26,17 @@ namespace MTG_Helper.BLL.BLLs
 
         public static List<string> GetCardColors(CardVm card)
         {
+            System.Console.WriteLine("Getting deck colors");
             var colorList = ExtractColorsFromString(card.Cost);
             colorList.AddRange(ExtractColorsFromString(card.RulesText));
+
+            colorList = colorList.Distinct().ToList();
+
+            System.Console.WriteLine("Found these colors:");
+            foreach (var color in colorList)
+            {
+                System.Console.WriteLine(color);
+            }
 
             return colorList;
         }
@@ -45,9 +54,10 @@ namespace MTG_Helper.BLL.BLLs
             return colorList;
         }
 
-        public static IEnumerable<CardVm> SearchCards(string tribal, string name, bool? commader)
+        public static IEnumerable<CardVm> SearchCards(string tribal, string name, bool? commader, string colors, string type)
         {
-            return CardMapper.Map(CardRepository.QueryCards(tribal, name, commader));
+            var colorList = colors?.Split(',').ToList();
+            return CardMapper.Map(CardRepository.QueryCards(tribal, name, commader, colorList, type));
         }
 
         public static CardVm GetCardByName(string cardName)
