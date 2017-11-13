@@ -43,6 +43,7 @@
     <Compile Include="BLLs\ApiBLL.cs" />
     <Compile Include="BLLs\CardBLL.cs" />
     <Compile Include="BLLs\DeckBLL.cs" />
+    <Compile Include="BLLs\TagBLL.cs" />
     <Compile Include="Mappers\CardMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CardLegalityVm.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
-using mtg.Models;
 using MTG_Helper.BLL.BLLs;
+using MVCLI.Attributes;
 
 namespace mtg.Controllers
 {

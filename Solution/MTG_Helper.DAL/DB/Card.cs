@@ -23,6 +23,7 @@ namespace MTG_Helper.DAL.DB
             this.CardTypes = new HashSet<CardType>();
             this.Decks = new HashSet<Deck>();
             this.DeckCards = new HashSet<DeckCard>();
+            this.CardTags = new HashSet<CardTag>();
         }
     
         public string CardId { get; set; }
@@ -55,5 +56,7 @@ namespace MTG_Helper.DAL.DB
         public virtual ICollection<Deck> Decks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeckCard> DeckCards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CardTag> CardTags { get; set; }
     }
 }

@@ -37,6 +37,7 @@
     <NavigationProperty Name="CardTypes" Relationship="Self.FK__CardTypes__CardI__5D95E53A" FromRole="Cards" ToRole="CardTypes" />
     <NavigationProperty Name="Decks" Relationship="MTG_DBModel.FK__Deck__Commander__5D60DB10" FromRole="Card" ToRole="Deck" />
     <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__CardI__6225902D" FromRole="Card" ToRole="DeckCard" />
+    <NavigationProperty Name="CardTags" Relationship="MTG_DBModel.FK__CardTags__CardId__1AF3F935" FromRole="Card" ToRole="CardTag" />
   </EntityType>
   <EntityType Name="CardSet">
     <Key>
@@ -266,6 +267,16 @@
       <End Role="Deck" EntitySet="Decks" />
       <End Role="DeckCard" EntitySet="DeckCards" />
     </AssociationSet>
+    <EntitySet Name="CardTags" EntityType="MTG_DBModel.CardTag" />
+    <EntitySet Name="Tags" EntityType="MTG_DBModel.Tag" />
+    <AssociationSet Name="FK__CardTags__CardId__1AF3F935" Association="MTG_DBModel.FK__CardTags__CardId__1AF3F935">
+      <End Role="Card" EntitySet="Cards" />
+      <End Role="CardTag" EntitySet="CardTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CardTags__TagId__1BE81D6E" Association="MTG_DBModel.FK__CardTags__TagId__1BE81D6E">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="CardTag" EntitySet="CardTags" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Deck">
     <Key>
@@ -321,6 +332,48 @@
       </Principal>
       <Dependent Role="DeckCard">
         <PropertyRef Name="DeckId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CardTag">
+    <Key>
+      <PropertyRef Name="CardTagId" />
+    </Key>
+    <Property Name="CardTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CardId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TagId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__CardTags__CardId__1AF3F935" FromRole="CardTag" ToRole="Card" />
+    <NavigationProperty Name="Tag" Relationship="MTG_DBModel.FK__CardTags__TagId__1BE81D6E" FromRole="CardTag" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CardTags" Relationship="MTG_DBModel.FK__CardTags__TagId__1BE81D6E" FromRole="Tag" ToRole="CardTag" />
+  </EntityType>
+  <Association Name="FK__CardTags__CardId__1AF3F935">
+    <End Type="MTG_DBModel.Card" Role="Card" Multiplicity="1" />
+    <End Type="MTG_DBModel.CardTag" Role="CardTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Card">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="CardTag">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CardTags__TagId__1BE81D6E">
+    <End Type="MTG_DBModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="MTG_DBModel.CardTag" Role="CardTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="CardTag">
+        <PropertyRef Name="TagId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -134,25 +134,53 @@ namespace MTG_Helper.DAL.Repositories
             }
         }
 
-        public static IEnumerable<CardDm> QueryCards(string tribal, string name, bool? commader, List<string> colors, string type)
+        public static IEnumerable<CardDm> QueryCards(string tribal, string name, bool? commader, List<string> colors, string type, string tag, int numberToReturn = -1)
         {
-            Console.WriteLine("db stuff");
             using (var db = new MtgEntities())
             {
                 var invalidColors = GetInvalidColors(colors);
-                Console.WriteLine("passed Colorss");
-                foreach (var invalidColor in invalidColors)
+                var white = "";
+                var blue = "";
+                var black = "";
+                var red = "";
+                var green = "";
+
+                foreach (var color in invalidColors)
                 {
-                    Console.WriteLine(invalidColor);
+                    switch (color)
+                    {
+                        case "{W}":
+                            white = color;
+                            break;
+                        case "{U}":
+                            blue = color;
+                            break;
+                        case "{B}":
+                            black = color;
+                            break;
+                        case "{R}":
+                            red = color;
+                            break;
+                        case "{G}":
+                            green = color;
+                            break;
+                    }
                 }
+                var takeNumber = numberToReturn > 0 ? numberToReturn : int.MaxValue;
 
                 var cards =  db.Cards.Where(c => 
+                    (tag == null || c.CardTags.Any(ct => ct.Tag.TagName == tag)) &&
                     (tribal == null || c.SubTypes.ToLower().Contains(tribal) || c.RulesText.ToLower().Contains(tribal)) &&
                     (commader == null || c.Types.Contains("Legendary")) &&
                     (name == null || c.CardName.ToLower() == name.ToLower()) &&
-                    //(colors == null || invalidColors.All(i => !c.Cost.Contains(i) && !c.RulesText.Contains(i))) &&
+                    (white == "" || (!c.Cost.Contains(white) && !c.RulesText.Contains(white))) &&
+                    (blue == "" || (!c.Cost.Contains(blue) && !c.RulesText.Contains(blue))) &&
+                    (black == "" || (!c.Cost.Contains(black) && !c.RulesText.Contains(black))) &&
+                    (red == "" || (!c.Cost.Contains(red) && !c.RulesText.Contains(red))) &&
+                    (green == "" || (!c.Cost.Contains(green) && !c.RulesText.Contains(green))) &&
+                    //(colors == null || invalidColors.All(i => !c.Cost.Contains(i) && !c.RulesText.Contains(i))) && //Super Wish this wouldn't blow up.
                     (type == null || c.Types.Contains(type))
-                );
+                ).Take(takeNumber);
                 
                 foreach (var card in cards)
                 {

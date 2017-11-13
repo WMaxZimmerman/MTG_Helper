@@ -54,10 +54,10 @@ namespace MTG_Helper.BLL.BLLs
             return colorList;
         }
 
-        public static IEnumerable<CardVm> SearchCards(string tribal, string name, bool? commader, string colors, string type)
+        public static IEnumerable<CardVm> SearchCards(string tribal, string name, bool? commader, string colors, string type, string tag, int numberToReturn = -1)
         {
             var colorList = colors?.Split(',').ToList();
-            return CardMapper.Map(CardRepository.QueryCards(tribal, name, commader, colorList, type));
+            return CardMapper.Map(CardRepository.QueryCards(tribal, name, commader, colorList, type, tag, numberToReturn));
         }
 
         public static CardVm GetCardByName(string cardName)

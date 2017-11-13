@@ -36,5 +36,7 @@ namespace MTG_Helper.DAL.DB
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<Deck> Decks { get; set; }
         public virtual DbSet<DeckCard> DeckCards { get; set; }
+        public virtual DbSet<CardTag> CardTags { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
     }
 }

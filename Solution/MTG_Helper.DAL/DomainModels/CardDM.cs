@@ -34,5 +34,7 @@ namespace MTG_Helper.DAL.DomainModels
         public List<CardSetDm> Sets { get; set; }
 
         public int Quantity { get; set; }
+
+        public List<TagDM> Tags { get; set; }
     }
 }

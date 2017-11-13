@@ -61,6 +61,14 @@
           <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="SubTypeId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CardTags">
+          <Key>
+            <PropertyRef Name="CardTagId" />
+          </Key>
+          <Property Name="CardTagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="CardTypes">
           <Key>
             <PropertyRef Name="CardTypeId" />
@@ -111,6 +119,13 @@
           <Property Name="SubTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SubTypeName" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Types">
           <Key>
             <PropertyRef Name="TypeId" />
@@ -118,7 +133,7 @@
           <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="varchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__CardColor__CardI__44952D46">
+        <Association Name="FK__CardColor__CardI__08D548FA">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="CardColors" Type="Self.CardColors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardColor__Color__4589517F">
+        <Association Name="FK__CardColor__Color__09C96D33">
           <End Role="Colors" Type="Self.Colors" Multiplicity="1" />
           <End Role="CardColors" Type="Self.CardColors" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +157,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardSets__CardId__4865BE2A">
+        <Association Name="FK__CardSets__CardId__0CA5D9DE">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="CardSets" Type="Self.CardSets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardSets__SetId__4959E263">
+        <Association Name="FK__CardSets__SetId__0D99FE17">
           <End Role="Sets" Type="Self.Sets" Multiplicity="1" />
           <End Role="CardSets" Type="Self.CardSets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +181,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardSubTy__CardI__40C49C62">
+        <Association Name="FK__CardSubTy__CardI__0504B816">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="CardSubTypes" Type="Self.CardSubTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +193,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardSubTy__SubTy__41B8C09B">
+        <Association Name="FK__CardSubTy__SubTy__05F8DC4F">
           <End Role="SubTypes" Type="Self.SubTypes" Multiplicity="1" />
           <End Role="CardSubTypes" Type="Self.CardSubTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +205,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardTypes__CardI__3CF40B7E">
+        <Association Name="FK__CardTags__CardId__1AF3F935">
+          <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
+          <End Role="CardTags" Type="Self.CardTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cards">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="CardTags">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CardTags__TagId__1BE81D6E">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="CardTags" Type="Self.CardTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="CardTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CardTypes__CardI__01342732">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="CardTypes" Type="Self.CardTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CardTypes__TypeI__3DE82FB7">
+        <Association Name="FK__CardTypes__TypeI__02284B6B">
           <End Role="Types" Type="Self.Types" Multiplicity="1" />
           <End Role="CardTypes" Type="Self.CardTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Deck__Commander__5D60DB10">
+        <Association Name="FK__Deck__Commander__116A8EFB">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="Deck" Type="Self.Deck" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeckCards__CardI__6225902D">
+        <Association Name="FK__DeckCards__CardI__162F4418">
           <End Role="Cards" Type="Self.Cards" Multiplicity="1" />
           <End Role="DeckCards" Type="Self.DeckCards" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,7 +277,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeckCards__DeckI__61316BF4">
+        <Association Name="FK__DeckCards__DeckI__153B1FDF">
           <End Role="Deck" Type="Self.Deck" Multiplicity="1" />
           <End Role="DeckCards" Type="Self.DeckCards" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,54 +294,64 @@
           <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardSets" EntityType="Self.CardSets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardSubTypes" EntityType="Self.CardSubTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardTags" EntityType="Self.CardTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardTypes" EntityType="Self.CardTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Deck" EntityType="Self.Deck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeckCards" EntityType="Self.DeckCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sets" EntityType="Self.Sets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubTypes" EntityType="Self.SubTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CardColor__CardI__44952D46" Association="Self.FK__CardColor__CardI__44952D46">
+          <AssociationSet Name="FK__CardColor__CardI__08D548FA" Association="Self.FK__CardColor__CardI__08D548FA">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="CardColors" EntitySet="CardColors" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardColor__Color__4589517F" Association="Self.FK__CardColor__Color__4589517F">
+          <AssociationSet Name="FK__CardColor__Color__09C96D33" Association="Self.FK__CardColor__Color__09C96D33">
             <End Role="Colors" EntitySet="Colors" />
             <End Role="CardColors" EntitySet="CardColors" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardSets__CardId__4865BE2A" Association="Self.FK__CardSets__CardId__4865BE2A">
+          <AssociationSet Name="FK__CardSets__CardId__0CA5D9DE" Association="Self.FK__CardSets__CardId__0CA5D9DE">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="CardSets" EntitySet="CardSets" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardSets__SetId__4959E263" Association="Self.FK__CardSets__SetId__4959E263">
+          <AssociationSet Name="FK__CardSets__SetId__0D99FE17" Association="Self.FK__CardSets__SetId__0D99FE17">
             <End Role="Sets" EntitySet="Sets" />
             <End Role="CardSets" EntitySet="CardSets" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardSubTy__CardI__40C49C62" Association="Self.FK__CardSubTy__CardI__40C49C62">
+          <AssociationSet Name="FK__CardSubTy__CardI__0504B816" Association="Self.FK__CardSubTy__CardI__0504B816">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="CardSubTypes" EntitySet="CardSubTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardSubTy__SubTy__41B8C09B" Association="Self.FK__CardSubTy__SubTy__41B8C09B">
+          <AssociationSet Name="FK__CardSubTy__SubTy__05F8DC4F" Association="Self.FK__CardSubTy__SubTy__05F8DC4F">
             <End Role="SubTypes" EntitySet="SubTypes" />
             <End Role="CardSubTypes" EntitySet="CardSubTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardTypes__CardI__3CF40B7E" Association="Self.FK__CardTypes__CardI__3CF40B7E">
+          <AssociationSet Name="FK__CardTags__CardId__1AF3F935" Association="Self.FK__CardTags__CardId__1AF3F935">
+            <End Role="Cards" EntitySet="Cards" />
+            <End Role="CardTags" EntitySet="CardTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CardTags__TagId__1BE81D6E" Association="Self.FK__CardTags__TagId__1BE81D6E">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="CardTags" EntitySet="CardTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CardTypes__CardI__01342732" Association="Self.FK__CardTypes__CardI__01342732">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="CardTypes" EntitySet="CardTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__CardTypes__TypeI__3DE82FB7" Association="Self.FK__CardTypes__TypeI__3DE82FB7">
+          <AssociationSet Name="FK__CardTypes__TypeI__02284B6B" Association="Self.FK__CardTypes__TypeI__02284B6B">
             <End Role="Types" EntitySet="Types" />
             <End Role="CardTypes" EntitySet="CardTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Deck__Commander__5D60DB10" Association="Self.FK__Deck__Commander__5D60DB10">
+          <AssociationSet Name="FK__Deck__Commander__116A8EFB" Association="Self.FK__Deck__Commander__116A8EFB">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="Deck" EntitySet="Deck" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeckCards__CardI__6225902D" Association="Self.FK__DeckCards__CardI__6225902D">
+          <AssociationSet Name="FK__DeckCards__CardI__162F4418" Association="Self.FK__DeckCards__CardI__162F4418">
             <End Role="Cards" EntitySet="Cards" />
             <End Role="DeckCards" EntitySet="DeckCards" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeckCards__DeckI__61316BF4" Association="Self.FK__DeckCards__DeckI__61316BF4">
+          <AssociationSet Name="FK__DeckCards__DeckI__153B1FDF" Association="Self.FK__DeckCards__DeckI__153B1FDF">
             <End Role="Deck" EntitySet="Deck" />
             <End Role="DeckCards" EntitySet="DeckCards" />
           </AssociationSet>
@@ -348,6 +397,7 @@
           <NavigationProperty Name="CardTypes" Relationship="Self.FK__CardTypes__CardI__5D95E53A" FromRole="Cards" ToRole="CardTypes" />
           <NavigationProperty Name="Decks" Relationship="MTG_DBModel.FK__Deck__Commander__5D60DB10" FromRole="Card" ToRole="Deck" />
           <NavigationProperty Name="DeckCards" Relationship="MTG_DBModel.FK__DeckCards__CardI__6225902D" FromRole="Card" ToRole="DeckCard" />
+          <NavigationProperty Name="CardTags" Relationship="MTG_DBModel.FK__CardTags__CardId__1AF3F935" FromRole="Card" ToRole="CardTag" />
         </EntityType>
         <EntityType Name="CardSet">
           <Key>
@@ -577,6 +627,16 @@
             <End Role="Deck" EntitySet="Decks" />
             <End Role="DeckCard" EntitySet="DeckCards" />
           </AssociationSet>
+          <EntitySet Name="CardTags" EntityType="MTG_DBModel.CardTag" />
+          <EntitySet Name="Tags" EntityType="MTG_DBModel.Tag" />
+          <AssociationSet Name="FK__CardTags__CardId__1AF3F935" Association="MTG_DBModel.FK__CardTags__CardId__1AF3F935">
+            <End Role="Card" EntitySet="Cards" />
+            <End Role="CardTag" EntitySet="CardTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CardTags__TagId__1BE81D6E" Association="MTG_DBModel.FK__CardTags__TagId__1BE81D6E">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="CardTag" EntitySet="CardTags" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Deck">
           <Key>
@@ -632,6 +692,48 @@
             </Principal>
             <Dependent Role="DeckCard">
               <PropertyRef Name="DeckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CardTag">
+          <Key>
+            <PropertyRef Name="CardTagId" />
+          </Key>
+          <Property Name="CardTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="MTG_DBModel.FK__CardTags__CardId__1AF3F935" FromRole="CardTag" ToRole="Card" />
+          <NavigationProperty Name="Tag" Relationship="MTG_DBModel.FK__CardTags__TagId__1BE81D6E" FromRole="CardTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CardTags" Relationship="MTG_DBModel.FK__CardTags__TagId__1BE81D6E" FromRole="Tag" ToRole="CardTag" />
+        </EntityType>
+        <Association Name="FK__CardTags__CardId__1AF3F935">
+          <End Type="MTG_DBModel.Card" Role="Card" Multiplicity="1" />
+          <End Type="MTG_DBModel.CardTag" Role="CardTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="CardId" />
+            </Principal>
+            <Dependent Role="CardTag">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CardTags__TagId__1BE81D6E">
+          <End Type="MTG_DBModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="MTG_DBModel.CardTag" Role="CardTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="CardTag">
+              <PropertyRef Name="TagId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -762,6 +864,23 @@
                 <ScalarProperty Name="CardId" ColumnName="CardId" />
                 <ScalarProperty Name="DeckId" ColumnName="DeckId" />
                 <ScalarProperty Name="DeckCardsId" ColumnName="DeckCardsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTags">
+            <EntityTypeMapping TypeName="MTG_DBModel.CardTag">
+              <MappingFragment StoreEntitySet="CardTags">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CardTagId" ColumnName="CardTagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="MTG_DBModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

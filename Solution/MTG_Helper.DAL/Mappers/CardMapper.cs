@@ -68,7 +68,8 @@ namespace MTG_Helper.DAL.Mappers
                 Types = em.Types.Replace(" ", "").Split(',').ToList(),
                 SubTypes = em.SubTypes.Replace(" ", "").Split(',').ToList(),
                 Colors = em.Colors.Replace(" ", "").Split(',').ToList(),
-                Sets = MapSets(em.CardSets.ToList())
+                Sets = MapSets(em.CardSets.ToList()),
+                Tags = TagMapper.Map(em.CardTags.Select(ct => ct.Tag)).ToList()
             };
 
             return dm;

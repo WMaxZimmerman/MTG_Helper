@@ -68,6 +68,9 @@
     <Compile Include="DB\CardSubType.cs">
       <DependentUpon>MTG_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\CardTag.cs">
+      <DependentUpon>MTG_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\CardType.cs">
       <DependentUpon>MTG_DB.tt</DependentUpon>
     </Compile>
@@ -101,6 +104,9 @@
     <Compile Include="DB\SubType.cs">
       <DependentUpon>MTG_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\Tag.cs">
+      <DependentUpon>MTG_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\Type.cs">
       <DependentUpon>MTG_DB.tt</DependentUpon>
     </Compile>
@@ -114,16 +120,19 @@
     <Compile Include="DomainModels\CardPriceDm.cs" />
     <Compile Include="DomainModels\CardSetDm.cs" />
     <Compile Include="DomainModels\DeckDm.cs" />
+    <Compile Include="DomainModels\TagDM.cs" />
     <Compile Include="Mappers\CardMapper.cs" />
     <Compile Include="Mappers\ColorMapper.cs" />
     <Compile Include="Mappers\DeckMapper.cs" />
     <Compile Include="Mappers\SetMapper.cs" />
     <Compile Include="Mappers\SubTypeMapper.cs" />
+    <Compile Include="Mappers\TagMapper.cs" />
     <Compile Include="Mappers\TypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CardRepository.cs" />
     <Compile Include="Repositories\DeckRepository.cs" />
     <Compile Include="Repositories\SetRepository.cs" />
+    <Compile Include="Repositories\TagRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
