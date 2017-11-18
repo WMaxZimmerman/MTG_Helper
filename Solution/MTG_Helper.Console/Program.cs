@@ -1,4 +1,4 @@
-﻿using MVCLI.Core;
+﻿using CommandAndConquer.CLI.Core;
 
 namespace MTG_Helper.Console
 {

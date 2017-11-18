@@ -1,6 +1,6 @@
-﻿using mtg.Views;
+﻿using CommandAndConquer.CLI.Attributes;
+using mtg.Views;
 using MTG_Helper.BLL.BLLs;
-using MVCLI.Attributes;
 
 namespace mtg.Controllers
 {

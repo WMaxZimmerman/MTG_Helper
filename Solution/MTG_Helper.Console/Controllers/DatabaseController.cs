@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using MTG_Helper.BLL.BLLs;
-using MVCLI.Attributes;
+using CommandAndConquer.CLI.Attributes;
 
 namespace mtg.Controllers
 {
