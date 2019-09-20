@@ -35,3 +35,5 @@ C:\git\MTG_Helper\Solution\MTG_Helper.DAL\bin\Debug\System.Net.Http.Formatting.x
 C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.dll
 C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.pdb
 C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.csproj.CoreCompileInputs.cache
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.csprojAssemblyReference.cache
+C:\git\MTG_Helper\Solution\MTG_Helper.DAL\obj\Debug\MTG_Helper.DAL.csproj.CopyComplete

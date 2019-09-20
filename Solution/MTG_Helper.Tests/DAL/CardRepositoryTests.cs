@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MTG_Helper.DAL.DomainModels;
+﻿using System.Linq;
 using MTG_Helper.DAL.Repositories;
 using NUnit.Framework;
 

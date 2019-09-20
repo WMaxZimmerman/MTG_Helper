@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\BigDeckPlays.Shared\BigDeckPlays.Shared.csproj" />
+    <ProjectReference Include="..\BigDeckPlays.DAL\BigDeckPlays.DAL.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

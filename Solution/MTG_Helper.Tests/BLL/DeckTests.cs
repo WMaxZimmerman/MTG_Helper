@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace MTG_Helper.Tests.BLL
 {
-    [TestClass]
+    [TestFixture]
     public class DeckTests
     {
-        [TestMethod]
+        [Test]
         public void AbleToCreateDeck()
         {
         }
