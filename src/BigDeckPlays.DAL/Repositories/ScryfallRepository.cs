@@ -30,7 +30,7 @@ namespace BigDeckPlays.DAL.Repositories
 
         public IEnumerable<Card> GetCards()
         {
-            // Ends at 1477
+            // API Ends at 1477
             var baseurl = "https://api.scryfall.com/cards?page=1";
 
             while(baseurl != null)
