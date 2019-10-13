@@ -14,6 +14,13 @@ namespace BigDeckPlays.DAL.Repositories
     
     public class ScryfallRepository
     {
+        private IConsoleRepository _console;
+        
+        public ScryfallRepository(IConsoleRepository console = null)
+        {
+            _console = console ?? new ConsoleRepository();
+        }
+        
         public IEnumerable<Card> GetCards(IEnumerable<string> cardNames)
         {
             var baseurl = "https://api.scryfall.com/cards/named?fuzzy=";
@@ -22,7 +29,7 @@ namespace BigDeckPlays.DAL.Repositories
             {
                 var parsedName = name.Replace(' ', '+');
                 var card = GetStuff<Card>(baseurl + parsedName);
-                Console.WriteLine(card.Name + " (" + card.Cmc + ")");
+                _console.WriteLine(card.Name + " (" + card.Cmc + ")");
             }
 
             return null;
@@ -40,7 +47,7 @@ namespace BigDeckPlays.DAL.Repositories
 
                 foreach(var card in data.Data.Distinct())
                 {
-                    Console.WriteLine(card.Name);
+                    _console.WriteLine(card.Name);
                 }
             }
 
