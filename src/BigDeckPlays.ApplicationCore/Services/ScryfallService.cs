@@ -25,16 +25,11 @@ namespace BigDeckPlays.ApplicationCore.Services
         
         public IEnumerable<Card> GetCards(IEnumerable<string> cardNames)
         {
-            var cards = new List<Card>();
-            
-            foreach(var name in cardNames)
-            {
-                var url = _repo.GetFuzzyCardUrl(name);
-                var card = _api.Get<Card>(url);
-                cards.Add(card);
-            }
-
-            return cards;
+            return cardNames.Select(name =>
+                    {
+                        var url = _repo.GetFuzzyCardUrl(name);
+                        return _api.Get<Card>(url);
+                    });
         }
     }
 }

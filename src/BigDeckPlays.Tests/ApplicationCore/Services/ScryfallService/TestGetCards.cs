@@ -27,7 +27,7 @@ namespace BigDeckPlays.Tests.ApplicationCore.Services.ScryFallService
                 "carpet of flowers"
             };
 
-            _service.GetCards(expectedCards);
+            _service.GetCards(expectedCards).ToList();
 
             _mockApi.Verify(a => a.Get<Card>(expectedUrl), Times.Exactly(expectedCards.Count));
         }
